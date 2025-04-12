@@ -1,0 +1,138 @@
+/* Animation pour le formulaire */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.top-bar {
+    background-color: #34495e;
+    padding: 10px 20px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+}
+.form-container {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.6s ease-out forwards;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #34495e;
+    position: relative;
+}
+
+.form-header h2 {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.form-header::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(to right, #27ae60, #3498db);
+    margin: 15px auto;
+    border-radius: 3px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+    position: relative;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #34495e;
+    transition: all 0.3s;
+}
+
+.form-control {
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px 15px;
+    transition: all 0.3s;
+    box-shadow: none;
+}
+
+.form-control:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+}
+
+.form-group.focused label {
+    color: #3498db;
+    transform: translateY(-5px);
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    border: none;
+    padding: 12px 30px;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+.btn-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+/* Délais d'animation pour chaque champ */
+.form-group:nth-child(1) { animation-delay: 0.2s; }
+.form-group:nth-child(2) { animation-delay: 0.3s; }
+.form-group:nth-child(3) { animation-delay: 0.4s; }
+.form-group:nth-child(4) { animation-delay: 0.5s; }
+.form-group:nth-child(5) { animation-delay: 0.6s; }
+.form-group:nth-child(6) { animation-delay: 0.7s; }
+.form-group:nth-child(7) { animation-delay: 0.8s; }
+.form-group:nth-child(8) { animation-delay: 0.9s; }
+.form-group:nth-child(9) { animation-delay: 1.0s; }
+.add-activity-link {
+    display: inline-block;
+    margin: 20px;
+    padding: 8px 12px;
+    background-color: #c5dbca;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .add-activity-link:hover {
+    background-color: #c5dbca;
+  }
+  

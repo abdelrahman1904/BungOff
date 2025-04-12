@@ -1,0 +1,489 @@
+/* details.css */
+:root {
+    --primary: #126cb6;
+    --primary-light: #3498db;
+    --secondary: #b49786;
+    --secondary-light: #d4b8a7;
+    --dark: #1a2229;
+    --light: #ecf0f1;
+    --success: #27ae60;
+    --danger: #e74c3c;
+    --warning: #f39c12;
+    --gray: #95a5a6;
+    --white: #ffffff;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Reset et styles de base */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  /* En-tête */
+  header {
+    background-color: var(--primary);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow);
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  
+  .logo-img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .off {
+    color: var(--secondary);
+  }
+  
+  nav ul {
+    display: flex;
+    list-style: none;
+  }
+  
+  nav ul li {
+    margin: 0 15px;
+    position: relative;
+  }
+  
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s;
+  }
+  
+  nav ul li a i {
+    margin-right: 8px;
+    color: var(--secondary);
+    font-size: 1.1rem;
+  }
+  
+  nav ul li a:hover {
+    color: var(--secondary-light);
+  }
+  
+  .extra-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .weather {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .weather-icon {
+    font-size: 1.4rem;
+    color: var(--light);
+  }
+  
+  .weather-info {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+  }
+  
+  .search-icon, .login-icon {
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  
+  .search-icon:hover, .login-icon:hover {
+    transform: scale(1.1);
+    color: var(--secondary-light);
+  }
+  
+  /* Contenu principal */
+  .all-activities-container {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .main-title {
+    text-align: center;
+    margin: 1rem 0 2rem;
+    color: var(--primary);
+    font-size: 2.5rem;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .main-title::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: var(--secondary);
+    margin: 15px auto 30px;
+    border-radius: 2px;
+  }
+  
+  .activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+  
+  /* Cartes d'activités */
+  .activity-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .activity-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+  }
+  
+  .activity-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-bottom: 3px solid var(--secondary);
+  }
+  
+  /* Badges d'information */
+  .activity-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 2;
+  }
+  
+  .activity-badge span {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  
+  .places {
+    background-color: var(--white);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+  }
+  
+  .price {
+    background-color: var(--secondary);
+    color: var(--white);
+  }
+  
+  /* Contenu des cartes */
+  .activity-content {
+    padding: 1.5rem;
+  }
+  
+  .activity-content h3 {
+    margin: 0 0 1rem;
+    color: var(--primary);
+    font-size: 1.4rem;
+  }
+  
+  .activity-desc {
+    color: #666;
+    font-size: 0.95rem;
+    margin: 1rem 0 0;
+    line-height: 1.5;
+  }
+  
+  /* Boutons de disponibilité */
+  .availability-toggle {
+    margin: 1rem 0;
+  }
+  
+  .availability-btn {
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    width: 100%;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: var(--shadow);
+  }
+  
+  .availability-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
+  }
+  
+  .availability-btn.active {
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
+  }
+  
+  .availability-btn i {
+    font-size: 1.1rem;
+  }
+  
+  /* Animation pulse */
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
+  .pulse {
+    animation: pulse 2s infinite;
+  }
+  
+  .pulse:hover {
+    animation: none;
+  }
+  
+  /* Section des disponibilités */
+  .availability-dates {
+    display: none;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    border: 1px solid #eee;
+  }
+  
+  .time-slot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dashed #ddd;
+  }
+  
+  .time-slot:last-child {
+    border-bottom: none;
+  }
+  
+  .slot-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #555;
+    font-size: 0.95rem;
+  }
+  
+  .slot-info i {
+    color: var(--primary);
+    min-width: 16px;
+  }
+  
+  .remaining {
+    font-size: 0.85rem;
+    color: #777;
+    margin-left: 8px;
+  }
+  
+  /* Boutons de réservation */
+  .register-btn {
+    background: linear-gradient(135deg, var(--secondary), var(--secondary-light));
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: var(--shadow);
+  }
+  
+  .register-btn:hover:not(.disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    background: linear-gradient(135deg, var(--secondary-light), var(--secondary));
+  }
+  
+  .register-btn.disabled {
+    background: var(--gray);
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+  
+  .register-btn.confirmed {
+    background: linear-gradient(135deg, var(--success), #2ecc71);
+  }
+  
+  /* Animation shine */
+  @keyframes shine {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+  }
+  
+  .shine {
+    background-size: 200% auto;
+    background-image: linear-gradient(45deg, 
+      var(--secondary) 0%,
+      var(--secondary-light) 25%,
+      var(--secondary) 50%,
+      var(--secondary-light) 75%,
+      var(--secondary) 100%);
+    animation: shine 3s linear infinite;
+  }
+  
+  /* Styles pour les nouvelles cartes sans disponibilités */
+  .activity-card.simple .activity-content {
+    padding-bottom: 2rem;
+  }
+  
+  /* Pied de page */
+  .blue-section {
+    background-color: var(--primary);
+    color: white;
+    padding: 3rem 2rem;
+  }
+  
+  .info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .services-info, .contact-info, .social-info, .reserve-now {
+    padding: 0 1rem;
+  }
+  
+  .info h3 {
+    color: var(--secondary);
+    margin-top: 0;
+    font-size: 1.3rem;
+    border-bottom: 2px solid var(--secondary);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+  
+  .info p {
+    margin: 0.8rem 0;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .info p:hover {
+    color: var(--secondary);
+  }
+  
+  .reserve-now {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  
+  .reserve-now:hover {
+    background-color: var(--secondary);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+  }
+  
+  /* Responsive */
+  @media (max-width: 1024px) {
+    header {
+      flex-direction: column;
+      padding: 1rem;
+      gap: 1rem;
+    }
+    
+    nav ul {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .extra-info {
+      margin-top: 1rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .activities-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    nav ul li {
+      margin: 0 10px;
+    }
+    
+    .info {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .main-title {
+      font-size: 2rem;
+    }
+    
+    .info {
+      grid-template-columns: 1fr;
+    }
+    
+    .time-slot {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    
+    .register-btn {
+      align-self: flex-end;
+    }
+  }
