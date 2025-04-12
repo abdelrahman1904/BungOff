@@ -1,0 +1,696 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f7f9fc;
+    color: #333;
+  }
+  
+  header {
+    background-color: #126cb6;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .logo-img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  .off {
+    color: #b49786;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  nav ul li a:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  nav ul li a i {
+    margin-right: 5px;
+    color: #b49786;
+  }
+  
+  .extra-info {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  .weather {
+    display: flex;
+    align-items: center;
+  }
+  
+  .weather-icon {
+    font-size: 22px;
+    margin-right: 6px;
+    color: #dde0ee;
+  }
+  
+  /* Activités */
+  .activities-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes égales */
+    gap: 30px; /* espace entre les cartes */
+    padding: 40px 30px;
+    background-color: white;
+  }
+  
+  .activity-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 50px 20px rgba(0,0,0,0.1);
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease;
+    height: 100%;
+  }
+  
+  .activity-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+  }
+  
+  
+  
+  .activity-card:hover {
+    transform: scale(1.05);
+  }
+  
+  
+  
+  .activity-card:hover img {
+    transform: scale(1.1); /* Effet zoom au survol de l'image */
+  }
+  
+  /* Overlay d'information à l'intérieur de l'image */
+  .info-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(11, 70, 23, 0.8); /* Transparence bleue */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s 0.3s;
+  }
+  
+  .activity-card:hover .info-overlay {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease;
+  }
+  
+  .info-overlay h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .info-overlay p {
+    font-size: 16px;
+    margin: 5px 0;
+    text-align: center;
+  }
+  
+  .reserve-btn {
+    padding: 10px 20px;
+    margin-top: 15px;
+    background-color:#23e412;;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .reserve-btn:hover {
+    background-color: #0e5a8a;
+  }
+  
+  .reserve-btn.unavailable {
+    background-color: #23e412;
+    cursor: not-allowed;
+  }
+  
+  .reserve-btn.unavailable:hover {
+    background-color: #23e412;
+  }
+  
+  .blue-section {
+    background-color: #126cb6;
+    color: white;
+    padding: 40px 20px;
+  }
+  
+  .info {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .services-info, .contact-info, .social-info, .reserve-now {
+    margin: 10px;
+  }
+  
+  .reserve-now {
+    font-weight: bold;
+    text-align: right;
+    color: #b49786;
+  }
+  .info-overlay h3 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #23e412; /* Remplace cette couleur par celle que tu préfères */
+    }
+    .activities-title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin: 50px 0;
+    }
+    
+    .activities-title h2 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
+    
+    .activities-title .letter {
+      position: relative;
+      padding: 0 10px;
+      display: inline-block;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      animation: slideIn 1s ease-out forwards;
+      margin: 0 5px; /* Ajoute un peu d'espace entre les lettres */
+      opacity: 0; /* Les lettres sont invisibles au départ */
+    }
+    
+    /* Appliquer une image de fond différente à chaque lettre */
+    .activities-title .letter:nth-child(1) {
+      background-image: url('image/carte.jpg');
+    }
+    .activities-title .letter:nth-child(2) {
+      background-image: url('image/carte.jpg');
+    }
+    .activities-title .letter:nth-child(3) {
+      background-image: url('image/carte.jpg');
+    }
+    .activities-title .letter:nth-child(4) {
+      background-image: url('image/carte.jpg');
+    }
+    .activities-title .letter:nth-child(5) {
+      background-image: url('image/carte.jpg');
+    }
+    .activities-title .letter:nth-child(6) {
+      background-image: url('image/carte.jpg');
+    }
+    .activities-title .letter:nth-child(7) {
+      background-image: url('image/carte.jpg');
+    }
+    .activities-title .letter:nth-child(8) {
+      background-image: url('image/carte.jpg');
+    }
+    .activities-title .letter:nth-child(9) {
+      background-image: url('image/carte.jpg');
+    }
+    
+    /* Animation pour chaque lettre */
+    @keyframes slideIn {
+      0% {
+        transform: translateY(100px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    /* Ajoute un délai pour chaque lettre pour l'effet séquentiel */
+    .activities-title .letter:nth-child(1) {
+      animation-delay: 0s;
+    }
+    .activities-title .letter:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+    .activities-title .letter:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+    .activities-title .letter:nth-child(4) {
+      animation-delay: 0.3s;
+    }
+    .activities-title .letter:nth-child(5) {
+      animation-delay: 0.4s;
+    }
+    .activities-title .letter:nth-child(6) {
+      animation-delay: 0.5s;
+    }
+    .activities-title .letter:nth-child(7) {
+      animation-delay: 0.6s;
+    }
+    .activities-title .letter:nth-child(8) {
+      animation-delay: 0.7s;
+    }
+    .activities-title .letter:nth-child(9) {
+      animation-delay: 0.8s;
+    }
+    .activities-map {
+      margin-top: 50px;
+      text-align: center;
+    }
+    
+    #map {
+      width: 100%;
+      height: 400px; /* Ajustez la hauteur selon votre besoin */
+    }
+  /* Style pour la section contenant la carte et la localisation */
+  .activities-map {
+      position: relative;
+      width: 100%;
+      margin-bottom: 20px; /* Espace sous la carte */
+    }
+    
+    /* Centrer la carte */
+    #map {
+      width: 100%;
+      height: 400px;
+    }
+    
+    /* Positionner le titre à gauche sous la carte */
+    .activities-location-title {
+      position: absolute;
+      left: 5px;  /* Espacement à gauche */
+      bottom: 20px; /* Espacement à partir du bas de la carte */
+      font-size: 1.5em;
+      color: #333;
+      font-weight: bold;
+      background-color: rgba(255, 255, 255, 0.8); /* Fond léger pour meilleure lisibilité */
+      padding: 10px;
+      border-radius: 5px;
+    }
+      .details-btn {
+    padding: 10px 20px;
+    margin-top: 15px;
+    background-color: #ffc107; /* Couleur de fond jaune */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .details-btn:hover {
+    background-color: #e69500; /* Couleur au survol */
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f7f9fc;
+    color: #333;
+  }
+  
+  header {
+    background-color: #126cb6;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .logo-img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  .off {
+    color: #b49786;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  nav ul li a:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  nav ul li a i {
+    margin-right: 5px;
+    color: #b49786;
+  }
+  
+  .extra-info {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  .weather {
+    display: flex;
+    align-items: center;
+  }
+  
+  .weather-icon {
+    font-size: 22px;
+    margin-right: 6px;
+    color: #dde0ee;
+  }
+  
+  /* Activités */
+  .activities-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes égales */
+    gap: 30px; /* espace entre les cartes */
+    padding: 40px 30px;
+    background-color: white;
+  }
+  
+  .activity-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 50px 20px rgba(0,0,0,0.1);
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease;
+    height: 100%;
+  }
+  
+  .activity-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+  }
+  
+  
+  
+  .activity-card:hover {
+    transform: scale(1.05);
+  }
+  
+  
+  
+  .activity-card:hover img {
+    transform: scale(1.1); /* Effet zoom au survol de l'image */
+  }
+  
+  /* Overlay d'information à l'intérieur de l'image */
+  .info-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(11, 70, 23, 0.8); /* Transparence bleue */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s 0.3s;
+  }
+  
+  .activity-card:hover .info-overlay {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease;
+  }
+  
+  .info-overlay h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .info-overlay p {
+    font-size: 16px;
+    margin: 5px 0;
+    text-align: center;
+  }
+  
+  .reserve-btn {
+    padding: 10px 20px;
+    margin-top: 15px;
+    background-color:#23e412;;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .reserve-btn:hover {
+    background-color: #0e5a8a;
+  }
+  
+  .reserve-btn.unavailable {
+    background-color: #23e412;
+    cursor: not-allowed;
+  }
+  
+  .reserve-btn.unavailable:hover {
+    background-color: #23e412;
+  }
+  
+  .blue-section {
+    background-color: #126cb6;
+    color: white;
+    padding: 40px 20px;
+  }
+  
+  .info {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .services-info, .contact-info, .social-info, .reserve-now {
+    margin: 10px;
+  }
+  
+  .reserve-now {
+    font-weight: bold;
+    text-align: right;
+    color: #b49786;
+  }
+  .info-overlay h3 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #23e412; /* Remplace cette couleur par celle que tu préfères */
+    }
+    .activities-title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin: 50px 0;
+    }
+    
+    .activities-title h2 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
+    
+    .activities-title .letter {
+      position: relative;
+      padding: 0 10px;
+      display: inline-block;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      animation: slideIn 1s ease-out forwards;
+      margin: 0 5px; /* Ajoute un peu d'espace entre les lettres */
+      opacity: 0; /* Les lettres sont invisibles au départ */
+    }
+    
+    /* Appliquer une image de fond différente à chaque lettre */
+    .activities-title .letter:nth-child(1) {
+      background-image: url('image/carte.jpg');
+    }
+    .activities-title .letter:nth-child(2) {
+      background-image: url('image/carte.jpg');
+    }
+    .activities-title .letter:nth-child(3) {
+      background-image: url('image/carte.jpg');
+    }
+    .activities-title .letter:nth-child(4) {
+      background-image: url('image/carte.jpg');
+    }
+    .activities-title .letter:nth-child(5) {
+      background-image: url('image/carte.jpg');
+    }
+    .activities-title .letter:nth-child(6) {
+      background-image: url('image/carte.jpg');
+    }
+    .activities-title .letter:nth-child(7) {
+      background-image: url('image/carte.jpg');
+    }
+    .activities-title .letter:nth-child(8) {
+      background-image: url('image/carte.jpg');
+    }
+    .activities-title .letter:nth-child(9) {
+      background-image: url('image/carte.jpg');
+    }
+    
+    /* Animation pour chaque lettre */
+    @keyframes slideIn {
+      0% {
+        transform: translateY(100px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    /* Ajoute un délai pour chaque lettre pour l'effet séquentiel */
+    .activities-title .letter:nth-child(1) {
+      animation-delay: 0s;
+    }
+    .activities-title .letter:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+    .activities-title .letter:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+    .activities-title .letter:nth-child(4) {
+      animation-delay: 0.3s;
+    }
+    .activities-title .letter:nth-child(5) {
+      animation-delay: 0.4s;
+    }
+    .activities-title .letter:nth-child(6) {
+      animation-delay: 0.5s;
+    }
+    .activities-title .letter:nth-child(7) {
+      animation-delay: 0.6s;
+    }
+    .activities-title .letter:nth-child(8) {
+      animation-delay: 0.7s;
+    }
+    .activities-title .letter:nth-child(9) {
+      animation-delay: 0.8s;
+    }
+    .activities-map {
+      margin-top: 50px;
+      text-align: center;
+    }
+    
+    #map {
+      width: 100%;
+      height: 400px; /* Ajustez la hauteur selon votre besoin */
+    }
+  /* Style pour la section contenant la carte et la localisation */
+  .activities-map {
+      position: relative;
+      width: 100%;
+      margin-bottom: 20px; /* Espace sous la carte */
+    }
+    
+    /* Centrer la carte */
+    #map {
+      width: 100%;
+      height: 400px;
+    }
+    
+    /* Positionner le titre à gauche sous la carte */
+    .activities-location-title {
+      position: absolute;
+      left: 5px;  /* Espacement à gauche */
+      bottom: 20px; /* Espacement à partir du bas de la carte */
+      font-size: 1.5em;
+      color: #333;
+      font-weight: bold;
+      background-color: rgba(255, 255, 255, 0.8); /* Fond léger pour meilleure lisibilité */
+      padding: 10px;
+      border-radius: 5px;
+    }
+      .details-btn {
+    padding: 10px 20px;
+    margin-top: 15px;
+    background-color: #ffc107; /* Couleur de fond jaune */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .details-btn:hover {
+    background-color: #e69500; /* Couleur au survol */
+  }
+  
+  

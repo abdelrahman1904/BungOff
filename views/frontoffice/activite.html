@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Activités - BungOFF</title>
+  <link rel="stylesheet" href="activite.css" />
+  <!-- Ajoutez ces lignes dans la section <head> de votre HTML pour inclure Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="image/maison.jpg" alt="Logo BungOFF" class="logo-img">
+    Bung<span class="off">OFF</span>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="#"><i class="fas fa-home"></i> Bungalows</a></li>
+      <li><a href="activite.html"><i class="fas fa-bicycle"></i> Activités</a></li>
+      <li><a href="#"><i class="fas fa-car"></i> Transports</a></li>
+      <li><a href="#"><i class="fas fa-credit-card"></i> Promotions</a></li>
+      <li><a href="#"><i class="fas fa-comments"></i> Avis</a></li>
+    </ul>
+  </nav>
+  <div class="extra-info">
+    <div class="weather">
+      <i class="fas fa-cloud weather-icon"></i>
+      <div class="weather-info">
+        <div class="ville">Tunis</div>
+        <div class="temperature">22°C</div>
+      </div>
+    </div>
+    <i class="fas fa-search search-icon"></i>
+    <i class="fas fa-user login-icon"></i>
+  </div>
+</header>
+<section class="activities-title">
+    <h2>
+      <span class="letter">A</span>
+      <span class="letter">C</span>
+      <span class="letter">T</span>
+      <span class="letter">I</span>
+      <span class="letter">V</span>
+      <span class="letter">I</span>
+      <span class="letter">T</span>
+      <span class="letter">E</span>
+      <span class="letter">S</span>
+    </h2>
+  </section>
+  <section class="activities-map">
+    <div id="map" style="height: 400px;"></div>
+    <h3>Localisation des Activités</h3>
+  </section>
+  
+<main class="activities-container">
+    <!-- Carte Activité 1 -->
+    <div class="activity-card">
+      <img src="image/soiree.jpg" alt="Soirée">
+      <div class="info-overlay">
+        <h3>Soirée</h3>
+        <button class="reserve-btn">plus de details</details></button>
+      </div>
+    </div>
+
+    <!-- Carte Activité 2 -->
+    <div class="activity-card">
+      <img src="image/quad.jpg" alt="Quad">
+      <div class="info-overlay">
+        <h3>Quad Aventure</h3>
+        <button class="reserve-btn">plus de details</details></button>
+      </div>
+    </div>
+
+    <!-- Carte Activité 3 -->
+    <div class="activity-card">
+      <img src="image/cinema.jpg" alt="Cinéma">
+      <div class="info-overlay">
+        <h3>Cinéma en plein air</h3>
+        <button class="reserve-btn">plus de details</button>
+      </div>
+    </div>
+
+    <!-- Carte Activité 4 -->
+    <div class="activity-card">
+      <img src="image/parapante.jpg" alt="Parapente">
+      <div class="info-overlay">
+        <h3>Parapente</h3>
+        <button class="reserve-btn">plus de details</button>
+      </div>
+    </div>
+
+ 
+    <!-- Carte Activité 7 -->
+    <div class="activity-card">
+      <img src="image/plongee3.jpg" alt="Plongée 3">
+      <div class="info-overlay">
+        <h3>Plongée sous-marine</h3>
+        <button class="reserve-btn">plus de details</button>
+      </div>
+    </div>
+
+    <!-- Carte Activité 8 -->
+    <div class="activity-card">
+      <img src="image/randonnee1.jpg" alt="Randonnée 1">
+      <div class="info-overlay">
+        <h3>Randonnée en montagne</h3>
+        <button class="reserve-btn">plus de details</button>
+      </div>
+    </div>
+
+    <!-- Carte Activité 10 -->
+    <div class="activity-card">
+      <img src="image/kayak.jpg" alt="Kayak">
+      <div class="info-overlay">
+        <h3>Kayak sur la mer</h3>
+        <button class="reserve-btn">plus de details</button>
+      </div>
+    </div>
+
+    <!-- Carte Activité 11 -->
+    <div class="activity-card">
+      <img src="image/yoga.jpg" alt="Yoga 1">
+      <div class="info-overlay">
+        <h3>Yoga au lever du soleil</h3>
+        <button class="reserve-btn">plus de details</button>
+      </div>
+    </div>
+
+  
+
+    <!-- Carte Activité 14 -->
+    <div class="activity-card">
+      <img src="image/creation.jpg" alt="Création">
+      <div class="info-overlay">
+        <h3>Atelier Créatif</h3>
+        
+        <button class="reserve-btn">plus de details</button>
+      </div>
+    </div>
+</main>
+
+<section class="blue-section">
+  <div class="info">
+    <div class="services-info">
+      <h3>Nos Services</h3>
+      <p>Location de bungalows</p>
+      <p>Activités de groupe</p>
+      <p>Transports privés</p>
+    </div>
+    <div class="contact-info">
+      <h3>Contactez-nous</h3>
+      <p>Email : contact@bungoff.com</p>
+      <p>Téléphone : +216 94245514</p>
+      <p>Adresse : Ariana, Tunisie</p>
+    </div>
+    <div class="social-info">
+      <h3>Suivez-nous</h3>
+      <p>Facebook</p>
+      <p>Instagram</p>
+      <p>Twitter</p>
+    </div>
+    <div class="reserve-now">
+      <p>Réservez dès maintenant !</p>
+    </div>
+  </div>
+  
+</section>
+
+<script>
+  // Code pour gérer les sliders (si tu en as besoin)
+  document.querySelectorAll('.slider').forEach(slider => {
+    let slides = slider.querySelectorAll('.slide');
+    let index = 0;
+
+    setInterval(() => {
+      slides[index].classList.remove('active');
+      index = (index + 1) % slides.length;
+      slides[index].classList.add('active');
+    }, 2000);
+  });
+</script>
+
+<script src="activite.js"></script>
+</body>
+
+</html> 

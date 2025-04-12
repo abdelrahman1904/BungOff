@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Activités - BungOFF</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="details.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="image/maison.jpg" alt="Logo BungOFF" class="logo-img">
+    Bung<span class="off">OFF</span>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="#"><i class="fas fa-home"></i> Bungalows</a></li>
+      <li><a href="activite.html"><i class="fas fa-bicycle"></i> Activités</a></li>
+      <li><a href="#"><i class="fas fa-car"></i> Transports</a></li>
+      <li><a href="#"><i class="fas fa-credit-card"></i> Promotions</a></li>
+      <li><a href="#"><i class="fas fa-comments"></i> Avis</a></li>
+    </ul>
+  </nav>
+  <div class="extra-info">
+    <div class="weather">
+      <i class="fas fa-cloud weather-icon"></i>
+      <div class="weather-info">
+        <div class="ville">Tunis</div>
+        <div class="temperature">22°C</div>
+      </div>
+    </div>
+    <i class="fas fa-search search-icon"></i>
+    <i class="fas fa-user login-icon"></i>
+  </div>
+</header>
+
+<main class="all-activities-container">
+  <h1 class="main-title">Découvrez Nos Activités</h1>
+  
+  <div class="activities-grid">
+    <!-- Activité 1 -->
+    <div class="activity-card">
+      <div class="activity-badge">
+        <span class="places">10 places</span>
+        <span class="price">Gratuit</span>
+      </div>
+      <img src="image/soiree.jpg" alt="Soirée Exclusive">
+      <div class="activity-content">
+        <h3>Soirée Exclusive</h3>
+        <div class="availability-toggle">
+          <button class="availability-btn pulse">
+            <i class="fas fa-calendar-alt"></i> Voir planification
+          </button>
+        </div>
+        <div class="availability-dates">
+          <div class="time-slot">
+            <div class="slot-info">
+              <i class="fas fa-clock"></i> 15 Avril - 20h-2h
+              <span class="remaining">(5 places restantes)</span>
+            </div>
+            <button class="register-btn shine">
+              <i class="fas fa-user-plus"></i> Réserver
+            </button>
+          </div>
+          <div class="time-slot">
+            <div class="slot-info">
+              <i class="fas fa-clock"></i> 16 Avril - 20h-2h
+              <span class="remaining">(8 places restantes)</span>
+            </div>
+            <button class="register-btn shine">
+              <i class="fas fa-user-plus"></i> Réserver
+            </button>
+          </div>
+          <div class="time-slot">
+            <div class="slot-info">
+              <i class="fas fa-clock"></i> 22 Avril - 20h-2h
+              <span class="remaining">(10 places restantes)</span>
+            </div>
+            <button class="register-btn shine">
+              <i class="fas fa-user-plus"></i> Réserver
+            </button>
+          </div>
+        </div>
+        <p class="activity-desc">Soirée VIP avec DJ live et cocktails premium sous les étoiles.</p>
+      </div>
+    </div>
+
+    <!-- Activité 2 -->
+    <div class="activity-card">
+      <div class="activity-badge">
+        <span class="places">5 places</span>
+        <span class="price">60 DT</span>
+      </div>
+      <img src="image/quad.jpg" alt="Quad Aventure">
+      <div class="activity-content">
+        <h3>Quad Aventure</h3>
+        <div class="availability-toggle">
+          <button class="availability-btn pulse">
+            <i class="fas fa-calendar-alt"></i> Voir planification
+          </button>
+        </div>
+        <div class="availability-dates">
+          <div class="time-slot">
+            <div class="slot-info">
+              <i class="fas fa-clock"></i> 17 Avril - 9h-12h
+              <span class="remaining">(3 places restantes)</span>
+            </div>
+            <button class="register-btn shine">
+              <i class="fas fa-user-plus"></i> Réserver
+            </button>
+          </div>
+          <div class="time-slot">
+            <div class="slot-info">
+              <i class="fas fa-clock"></i> 19 Avril - 9h-12h
+              <span class="remaining">(5 places restantes)</span>
+            </div>
+            <button class="register-btn shine">
+              <i class="fas fa-user-plus"></i> Réserver
+            </button>
+          </div>
+          <div class="time-slot">
+            <div class="slot-info">
+              <i class="fas fa-clock"></i> 24 Avril - 9h-12h
+              <span class="remaining">(5 places restantes)</span>
+            </div>
+            <button class="register-btn shine">
+              <i class="fas fa-user-plus"></i> Réserver
+            </button>
+          </div>
+        </div>
+        <p class="activity-desc">Parcours désertique de 3h avec guide professionnel.</p>
+      </div>
+    </div>
+
+    <!-- Activité 3 -->
+    <div class="activity-card">
+      <div class="activity-badge">
+        <span class="places">Complet</span>
+        <span class="price">15 DT</span>
+      </div>
+      <img src="image/cinema.jpg" alt="Cinéma en plein air">
+      <div class="activity-content">
+        <h3>Cinéma en plein air</h3>
+        <div class="availability-toggle">
+          <button class="availability-btn pulse">
+            <i class="fas fa-calendar-alt"></i> Voir planification
+          </button>
+        </div>
+        <div class="availability-dates">
+          <div class="time-slot">
+            <div class="slot-info">
+              <i class="fas fa-clock"></i> 18 Avril - 21h30-23h30
+              <span class="remaining">(Complet)</span>
+            </div>
+            <button class="register-btn disabled" disabled>
+              <i class="fas fa-times"></i> Complet
+            </button>
+          </div>
+          <div class="time-slot">
+            <div class="slot-info">
+              <i class="fas fa-clock"></i> 25 Avril - 21h30-23h30
+              <span class="remaining">(2 places restantes)</span>
+            </div>
+            <button class="register-btn shine">
+              <i class="fas fa-user-plus"></i> Réserver
+            </button>
+          </div>
+          <div class="time-slot">
+            <div class="slot-info">
+              <i class="fas fa-clock"></i> 2 Mai - 21h30-23h30
+              <span class="remaining">(5 places restantes)</span>
+            </div>
+            <button class="register-btn shine">
+              <i class="fas fa-user-plus"></i> Réserver
+            </button>
+          </div>
+        </div>
+        <p class="activity-desc">Projection de film culte sous les étoiles avec snack-bar.</p>
+      </div>
+    </div>
+    <!-- Activité : Parapente -->
+<div class="activity-card">
+  <div class="activity-badge">
+    <span class="places">6 places</span>
+    <span class="price">120 TND</span>
+  </div>
+  <img src="image/parapante.jpg" alt="Parapente">
+  <div class="activity-content">
+    <h3>Parapente</h3>
+    <div class="availability-toggle">
+      <button class="availability-btn pulse">
+        <i class="fas fa-calendar-alt"></i> Voir planification
+      </button>
+    </div>
+    <div class="availability-dates">
+      <div class="time-slot">
+        <div class="slot-info">
+          <i class="fas fa-clock"></i> 17 Avril - 9h-11h
+          <span class="remaining">(3 places restantes)</span>
+        </div>
+        <button class="register-btn shine">
+          <i class="fas fa-user-plus"></i> Réserver
+        </button>
+      </div>
+      <div class="time-slot">
+        <div class="slot-info">
+          <i class="fas fa-clock"></i> 20 Avril - 14h-16h
+          <span class="remaining">(4 places restantes)</span>
+        </div>
+        <button class="register-btn shine">
+          <i class="fas fa-user-plus"></i> Réserver
+        </button>
+      </div>
+    </div>
+    <p class="activity-desc">Envolez-vous et découvrez des panoramas spectaculaires en toute sécurité.</p>
+  </div>
+</div>
+<!-- Activité : Plongée -->
+<div class="activity-card">
+  <div class="activity-badge">
+    <span class="places">8 places</span>
+    <span class="price">90 TND</span>
+  </div>
+  <img src="image/plongee3.jpg" alt="Plongée sous-marine">
+  <div class="activity-content">
+    <h3>Plongée</h3>
+    <div class="availability-toggle">
+      <button class="availability-btn pulse">
+        <i class="fas fa-calendar-alt"></i> Voir planification
+      </button>
+    </div>
+    <div class="availability-dates">
+      <div class="time-slot">
+        <div class="slot-info">
+          <i class="fas fa-clock"></i> 18 Avril - 10h-12h
+          <span class="remaining">(6 places restantes)</span>
+        </div>
+        <button class="register-btn shine">
+          <i class="fas fa-user-plus"></i> Réserver
+        </button>
+      </div>
+    </div>
+    <p class="activity-desc">Explorez les fonds marins et vivez une expérience inoubliable.</p>
+  </div>
+</div>
+<!-- Activité : Randonnée -->
+<div class="activity-card">
+  <div class="activity-badge">
+    <span class="places">12 places</span>
+    <span class="price">Gratuit</span>
+  </div>
+  <img src="image/randonnee1.jpg" alt="Randonnée nature">
+  <div class="activity-content">
+    <h3>Randonnée</h3>
+    <div class="availability-toggle">
+      <button class="availability-btn pulse">
+        <i class="fas fa-calendar-alt"></i> Voir planification
+      </button>
+    </div>
+    <div class="availability-dates">
+      <div class="time-slot">
+        <div class="slot-info">
+          <i class="fas fa-clock"></i> 16 Avril - 8h-12h
+          <span class="remaining">(10 places restantes)</span>
+        </div>
+        <button class="register-btn shine">
+          <i class="fas fa-user-plus"></i> Réserver
+        </button>
+      </div>
+    </div>
+    <p class="activity-desc">Parcourez les sentiers pittoresques et découvrez la nature locale.</p>
+  </div>
+</div>
+<!-- Activité : Kayak -->
+<div class="activity-card">
+  <div class="activity-badge">
+    <span class="places">5 places</span>
+    <span class="price">70 TND</span>
+  </div>
+  <img src="image/kayak.jpg" alt="Kayak">
+  <div class="activity-content">
+    <h3>Kayak</h3>
+    <div class="availability-toggle">
+      <button class="availability-btn pulse">
+        <i class="fas fa-calendar-alt"></i> Voir planification
+      </button>
+    </div>
+    <div class="availability-dates">
+      <div class="time-slot">
+        <div class="slot-info">
+          <i class="fas fa-clock"></i> 19 Avril - 10h-13h
+          <span class="remaining">(2 places restantes)</span>
+        </div>
+        <button class="register-btn shine">
+          <i class="fas fa-user-plus"></i> Réserver
+        </button>
+      </div>
+    </div>
+    <p class="activity-desc">Pagayez à travers les criques et les paysages marins exceptionnels.</p>
+  </div>
+</div>
+<!-- Activité : Yoga -->
+<div class="activity-card">
+  <div class="activity-badge">
+    <span class="places">10 places</span>
+    <span class="price">30 TND</span>
+  </div>
+  <img src="image/yoga3.jpg" alt="Yoga en plein air">
+  <div class="activity-content">
+    <h3>Yoga</h3>
+    <div class="availability-toggle">
+      <button class="availability-btn pulse">
+        <i class="fas fa-calendar-alt"></i> Voir planification
+      </button>
+    </div>
+    <div class="availability-dates">
+      <div class="time-slot">
+        <div class="slot-info">
+          <i class="fas fa-clock"></i> 20 Avril - 7h-8h
+          <span class="remaining">(9 places restantes)</span>
+        </div>
+        <button class="register-btn shine">
+          <i class="fas fa-user-plus"></i> Réserver
+        </button>
+      </div>
+    </div>
+    <p class="activity-desc">Relaxation et bien-être au cœur de la nature, séance guidée.</p>
+  </div>
+</div>
+<!-- Activité : Création -->
+<div class="activity-card">
+  <div class="activity-badge">
+    <span class="places">6 places</span>
+    <span class="price">Gratuit</span>
+  </div>
+  <img src="image/creation.jpg" alt="Atelier de création">
+  <div class="activity-content">
+    <h3>Création</h3>
+    <div class="availability-toggle">
+      <button class="availability-btn pulse">
+        <i class="fas fa-calendar-alt"></i> Voir planification
+      </button>
+    </div>
+    <div class="availability-dates">
+      <div class="time-slot">
+        <div class="slot-info">
+          <i class="fas fa-clock"></i> 21 Avril - 15h-17h
+          <span class="remaining">(4 places restantes)</span>
+        </div>
+        <button class="register-btn shine">
+          <i class="fas fa-user-plus"></i> Réserver
+        </button>
+      </div>
+    </div>
+    <p class="activity-desc">Exprimez votre créativité dans nos ateliers artistiques ludiques.</p>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<section class="blue-section">
+  <div class="info">
+    <div class="services-info">
+      <h3>Nos Services</h3>
+      <p>Location de bungalows</p>
+      <p>Activités de groupe</p>
+      <p>Transports privés</p>
+    </div>
+    <div class="contact-info">
+      <h3>Contactez-nous</h3>
+      <p>Email : contact@bungoff.com</p>
+      <p>Téléphone : +216 94245514</p>
+      <p>Adresse : Ariana, Tunisie</p>
+    </div>
+    <div class="social-info">
+      <h3>Suivez-nous</h3>
+      <p>Facebook</p>
+      <p>Instagram</p>
+      <p>Twitter</p>
+    </div>
+    <div class="reserve-now">
+      <p>Réservez dès maintenant !</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Animation des boutons de disponibilité
+  document.querySelectorAll('.availability-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const datesContainer = this.closest('.availability-toggle').nextElementSibling;
+      const isHidden = datesContainer.style.display === 'none' || !datesContainer.style.display;
+      
+      // Fermer tous les autres
+      document.querySelectorAll('.availability-dates').forEach(container => {
+        if (container !== datesContainer) {
+          container.style.display = 'none';
+          container.previousElementSibling.querySelector('.availability-btn').classList.remove('active');
+        }
+      });
+      
+      // Basculer l'état actuel
+      if (isHidden) {
+        datesContainer.style.display = 'block';
+        this.classList.add('active');
+        datesContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        datesContainer.style.display = 'none';
+        this.classList.remove('active');
+      }
+    });
+  });
+
+  // Gestion des réservations
+  document.querySelectorAll('.register-btn:not(.disabled)').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const remainingSpan = this.closest('.time-slot').querySelector('.remaining');
+      const placesText = remainingSpan.textContent.match(/\d+/);
+      
+      if (placesText) {
+        const places = parseInt(placesText[0]);
+        if (places > 0) {
+          remainingSpan.textContent = `(${places-1} places restantes)`;
+          if (places-1 === 0) {
+            remainingSpan.textContent = '(Complet)';
+            this.innerHTML = '<i class="fas fa-times"></i> Complet';
+            this.classList.add('disabled');
+            this.disabled = true;
+          } else {
+            this.innerHTML = '<i class="fas fa-check"></i> Réservé!';
+            this.classList.add('confirmed');
+            setTimeout(() => {
+              this.innerHTML = '<i class="fas fa-user-plus"></i> Réserver';
+              this.classList.remove('confirmed');
+            }, 2000);
+          }
+        }
+      }
+    });
+  });
+
+  // Fermer les disponibilités en cliquant ailleurs
+  document.addEventListener('click', function() {
+    document.querySelectorAll('.availability-dates').forEach(container => {
+      container.style.display = 'none';
+      container.previousElementSibling.querySelector('.availability-btn').classList.remove('active');
+    });
+  });
+
+  // Empêcher la fermeture quand on clique dans le container
+  document.querySelectorAll('.availability-dates, .availability-btn').forEach(el => {
+    el.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+  });
+</script>
+
+</body>
+</html>
