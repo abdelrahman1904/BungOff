@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Backoffice</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .admin-section { display: none; margin-top: 30px; }
+  </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="logo">Bung<span class="off">OFF</span></div>
+        <div class="right-icons">
+            <form class="search-form d-inline-flex">
+                <input type="text" class="form-control" placeholder="Recherche...">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+            <div class="login-icon d-inline-flex ms-3">
+                <i class="fas fa-user"></i>
+            </div>
+        </div>
+    </div>
+
+<!-- Barre latérale -->
+<div class="sidebar">
+    <a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <a href="#"><i class="fas fa-user"></i> Utilisateurs</a>
+    <a href="#"><i class="fas fa-home"></i> Bungalows</a>
+    <a href="#"><i class="fas fa-campground"></i> Activités</a>
+    <a href="btransport.html"><i class="fas fa-car"></i> Transports</a>
+    <a href="#"><i class="fas fa-credit-card"></i> Paiement</a>
+    <a href="#"><i class="fas fa-star"></i> Avis</a>
+    <div class="logout">
+        <a href="#"><i class="fas fa-sign-out-alt"></i> Se Déconnecter</a>
+    </div>
+</div>
+<!-- Contenu principal -->
+<div class="content2">
+  <h1>Transports</h1>
+  <div class="row mt-4">
+    <div class="col-md-3">
+      <div class="card bg-primary mb-3">
+          <div class="card-body text-white text-center">
+              <h5 class="card-title"> Ajouter Vehicule</h5>
+              <a href="ajouterV.php">Voir →</a>
+          </div>
+      </div>
+  </div>
+  <div class="col-md-3">
+  <div class="card bg-danger mb-3">
+      <div class="card-body text-white text-center">
+          <h5 class="card-title"><i class="fas fa-calendar-alt"></i> Consulter Vehicule</h5>
+          <a href="consulterV.php">Voir →</a>
+      </div>
+  </div>
+</div>
+<div class="col-md-3">
+  <div class="card bg-warning mb-3">
+      <div class="card-body text-white text-center">
+          <h5 class="card-title"><i class="fas fa-calendar-plus"></i> Ajouter Trajet</h5>
+          <a href="ajouterT.html">Voir →</a>
+      </div>
+  </div>
+</div>
+<div class="col-md-3">
+  <div class="card bg-success mb-3">
+      <div class="card-body text-white text-center">
+          <h5 class="card-title"><i class="fas fa-calendar-plus"></i> Consulter trajet </h5>
+          <a href="consulerT.php">Voir →</a>
+      </div>
+  </div>
+</div>
+  </div>
+
+  
+
+<script>
+  function showSection(id) {
+    const sections = document.querySelectorAll('.admin-section');
+    sections.forEach(section => section.style.display = 'none');
+    document.getElementById(id).style.display = 'block';
+  }
+
+function toggleForm(formId) {
+    // Cache tous les formulaires
+    document.querySelectorAll('.vehicle-form').forEach(form => {
+        form.style.display = 'none';
+    });
+    
+    // Affiche seulement celui demandé
+    const formToShow = document.getElementById(formId);
+    if (formToShow) {
+        formToShow.style.display = 'block';
+        
+        // Recharge le tableau si c'est la liste des véhicules
+        if (formId === 'listeVehicules') {
+            formToShow.innerHTML = ''; // Vide le contenu
+            fetch('aftransport.php')
+                .then(response => response.text())
+                .then(data => {
+                    formToShow.innerHTML = data;
+                });
+        }
+    }
+}
+
+document.getElementById('toggleSidebar').addEventListener('click', function () {
+    const sidebar = document.querySelector('.sidebar');
+    const links = sidebar.querySelectorAll('a');
+    const logout = sidebar.querySelector('.logout');
+
+    sidebar.classList.toggle('collapsed');
+    document.querySelector('.content2').classList.toggle('collapsed-content');
+
+    if (sidebar.classList.contains('collapsed')) {
+        // Réduit la sidebar et masque les textes mais laisse les icônes visibles
+        links.forEach(link => {
+            const icon = link.querySelector('i');
+            link.innerHTML = '';
+            if (icon) {
+                link.appendChild(icon);
+            }
+        });
+        if (logout) logout.style.display = 'none';
+    } else {
+        // Restaure les textes + icônes
+        links[0].innerHTML = '<i class="fas fa-tachometer-alt"></i> Dashboard';
+        links[1].innerHTML = '<i class="fas fa-user"></i> Utilisateurs';
+        links[2].innerHTML = '<i class="fas fa-home"></i> Bungalows';
+        links[3].innerHTML = '<i class="fas fa-campground"></i> Activités';
+        links[4].innerHTML = '<i class="fas fa-car"></i> Transports';
+        links[5].innerHTML = '<i class="fas fa-credit-card"></i> Paiement';
+        links[6].innerHTML = '<i class="fas fa-star"></i> Avis';
+        if (logout) logout.style.display = 'block';
+    }
+});
+</script>
+
+  
+</script>
+
+</body>
+</html>

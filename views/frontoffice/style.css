@@ -1,0 +1,505 @@
+/* Réinitialisation et styles généraux */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* En-tête */
+header {
+    background-color: #126cb6;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 30px;
+    height: 80;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.logo-img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.off {
+    color: #b49786;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li a i {
+    margin-right: 5px;
+    color: #b49786;
+}
+
+.extra-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.weather {
+    display: flex;
+    align-items: center;
+}
+
+.weather-icon {
+    font-size: 24px;
+    margin-right: 5px;
+    color: #dde0ee;
+}
+
+/* Vidéo en plein écran */
+.full-width-video {
+    width: 100%;
+    height: auto;
+}
+
+/* Texte d'introduction */
+.intro-text {
+    text-align: center;
+    font-size: 24px;
+    margin: 20px 0;
+}
+
+/* Section des destinations */
+.destinations {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.destination {
+    text-align: center;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+}
+
+.destination img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.destination-info {
+    padding: 10px;
+}
+
+/* Section bleue d'information */
+.blue-section {
+    background-color: #126cb6;
+    color: white;
+    padding: 40px 20px;
+}
+
+.info {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.services-info, .contact-info, .social-info , .reserve-now{
+    margin: 10px 0;
+}
+
+.reserve-now {
+    font-weight: bold;
+    text-align:right;
+    color: #b49786;
+    padding: 30px;
+}
+.transport-section {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+}
+
+.transport-section h2 {
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  text-align: center;}
+
+  .trajets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+  
+  .trajet-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #eee;
+  }
+  
+  .trajet-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .trajet-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+  
+  .carte-container {
+    height: 200px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 1rem 0;
+    background: #f0f0f0;
+  }
+
+  button {
+    padding: 10px 15px;
+    margin: 5px 5px 0 0;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+
+  button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+  }
+
+  .annuler-btn {
+    background-color: #f44336;
+  }
+
+  .annuler-btn:hover {
+    background-color: #e53935;
+    transform: scale(1.05);
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+  
+  
+ 
+    ;
+    
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+      animation: pulse 2s infinite;
+    }
+
+    header p {
+      font-size: 1.4rem;
+      font-style: italic;
+      animation: fadeInText 1.5s ease-out 0.5s forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeSlideDown {
+      from { transform: translateY(-30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeInText {
+      to { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+
+    .transport-section {
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .trajet-card {
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      margin: 20px 0;
+      padding: 20px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s forwards;
+    }
+
+    .trajet-card h3 {
+      margin-top: 0;
+      color: #023e8a;
+    }
+
+    .trajet-card:nth-child(1) { animation-delay: 0.2s; }
+    .trajet-card:nth-child(2) { animation-delay: 0.4s; }
+    .trajet-card:nth-child(3) { animation-delay: 0.6s; }
+    .trajet-card:nth-child(4) { animation-delay: 0.8s; }
+    .trajet-card:nth-child(5) { animation-delay: 1s; }
+    .trajet-card:nth-child(6) { animation-delay: 1.2s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .carte-container {
+      height: 300px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    button {
+      padding: 10px 15px;
+      margin: 5px;
+      background-color: #00b609;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease-in-out;
+    }
+
+    button:hover {
+      background-color: #04a71d;
+      transform: scale(1.05);
+    }
+
+    .annuler-btn {
+      background-color: #f44336;
+    }
+
+    .annuler-btn:hover {
+      background-color: #c62828;
+    }
+
+    #mes-trajets li {
+      opacity: 0;
+      animation: slideIn 0.5s forwards;
+      padding: 5px 0;
+    }
+
+    #mes-trajets li:nth-child(1) { animation-delay: 0.2s; }
+    #mes-trajets li:nth-child(2) { animation-delay: 0.4s; }
+    #mes-trajets li:nth-child(3) { animation-delay: 0.6s; }
+
+    @keyframes slideIn {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0); opacity: 1; }
+    }
+  #tt {
+          font-size: 3.5rem;
+          background: linear-gradient(90deg, #00d4ff, #0077b6, #90e0ef);
+          background-size: 200% auto;
+          color: transparent;
+          background-clip: text;
+          -webkit-background-clip: text;
+          animation: gradientMove 5s ease infinite;
+          text-shadow: 0 0 10px rgba(0,0,0,0.3);
+          letter-spacing: 2px;
+          margin-bottom: 10px;
+          
+        }
+      
+      #ttp {
+        font-size: 1.5rem;
+        color: #ffffff;
+        opacity: 0;
+        animation: slideFadeIn 1.5s ease-out 1s forwards, glowPulse 3s infinite ease-in-out;
+        font-style: italic;
+        text-shadow: 1px 1px 6px rgba(0,0,0,0.2);
+      }
+      
+      /* Animations */
+      @keyframes gradientMove {
+        0% {
+          background-position: 0% center;
+        }
+        100% {
+          background-position: 200% center;
+        }
+      }
+      
+      @keyframes titleBounce {
+        0% {
+          transform: scale(0.8) translateY(-30px);
+          opacity: 0;
+        }
+        60% {
+          transform: scale(1.1) translateY(10px);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1) translateY(0);
+        }
+      }
+      
+      @keyframes slideFadeIn {
+        0% {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      
+      @keyframes glowPulse {
+        0%, 100% {
+          text-shadow: 0 0 10px #00d4ff, 0 0 20px #0077b6;
+        }
+        50% {
+          text-shadow: 0 0 20px #05323a, 0 0 30px #78bafd;
+        }
+      } 
+/* Styles généraux pour le formulaire */
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles pour chaque champ de formulaire (input, select, textarea) */
+form input,
+form select,
+form textarea {
+    width: 90%;
+    padding: 12px;
+    margin: 10px 0; /* espace entre chaque champ */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+}
+
+/* Effet de focus sur les champs */
+form input:focus,
+form select:focus,
+form textarea:focus {
+    border-color: #126cb6;
+    outline: none;
+}
+
+/* Styles pour le label (texte descriptif du champ) */
+form label {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* Style pour le bouton de soumission */
+form button {
+    background-color: #00b609;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+/* Effet au survol du bouton */
+form button:hover {
+    background-color: #04a71d;
+    transform: scale(1.05);
+}
+
+/* Styles supplémentaires pour les messages d'erreur ou de succès */
+form .message {
+    font-size: 1rem;
+    color: #d32f2f; /* couleur pour le message d'erreur */
+    margin-top: 10px;
+}
+#ff {
+  padding: 20px;
+  float:right;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+}
+
+.back-link {
+  font-size: 20px;
+  color: #000000;
+  text-decoration: line;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+
+
+.arrow-bounce {
+  font-size: 36px;
+  animation: bounce 1s infinite;
+  transition: transform 0.3s ease;
+}
+
+@keyframes bounce {
+  0%, 100% {
+      transform: translateX(0);
+  }
+  50% {
+      transform: translateX(-10px);
+  }
+}
+#h1for {
+  text-align: center;
+  color: #90654c;
+  text-shadow: 2px 2px 4px rgba(27, 128, 228, 0.7);
+}
+

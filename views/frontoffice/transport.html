@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BungOFF - Réservation de Bungalows</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+  
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <img src="image_video/maison.jpg" alt="Logo BungOFF" class="logo-img">
+        Bung<span class="off">OFF</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="#"><i class="fas fa-home"></i> Bungalows</a></li>
+            <li><a href="#"><i class="fas fa-bicycle"></i> Activités</a></li>
+            <li><a href="transport.html"><i class="fas fa-car"></i> Transports</a></li>
+            <li><a href="#"><i class="fas fa-credit-card"></i> Paiement</a></li>
+            <li><a href="#"><i class="fas fa-comments"></i> Avis</a></li>
+        </ul>
+    </nav>
+    <div class="extra-info">
+        <div class="weather">
+            <i class="fas fa-cloud weather-icon"></i>
+            <div class="weather-info">
+                <div class="ville">Tunis</div>
+                <div class="temperature">22°C</div>
+            </div>
+        </div>
+        <i class="fas fa-search search-icon"></i>
+        <i class="fas fa-user login-icon"></i>
+    </div>
+    
+</header>
+<body>
+
+  <h1 id="tt">Réservation de Transports</h1>
+  <center><p id ="ttp">En route vers votre bungalow ! Réservez votre trajet en un clic.</p></center>
+ 
+
+  <section class="transport-section">
+    <center> <h2>🚍 Trajets Disponibles</h2></center>
+    <div class="trajets-grid">
+      <!-- Tunis → Tozeur -->
+      <div class="trajet-card">
+        <h3>Tunis → Tozeur</h3>
+        <div class="carte-container" id="map1"></div>
+        <p>🕓 08:00 → 13:00</p>
+        <p>🚐 Bus Mercedes - Capacité : 50</p>
+        <p>📏 370 km</p>
+        
+      </div>
+
+      <!-- Tunis → Tabarka -->
+      <div class="trajet-card">
+        <h3>Tunis → Tabarka</h3>
+        <div class="carte-container" id="map2"></div>
+        <p>🕓 09:00 → 12:00</p>
+        <p>🚐 Car Renault - Capacité : 30</p>
+        <p>📏 160 km</p>
+        
+      </div>
+
+      <!-- Tunis → Rafraf -->
+      <div class="trajet-card">
+        <h3>Tunis → Rafraf</h3>
+        <div class="carte-container" id="map3"></div>
+        <p>🕓 10:00 → 12:00</p>
+        <p>🚐 Van Peugeot - Capacité : 20</p>
+        <p>📏 100 km</p>
+        
+      </div>
+
+      <!-- Tozeur → Tunis -->
+      <div class="trajet-card">
+        <h3>Tozeur → Tunis</h3>
+        <div class="carte-container" id="map4"></div>
+        <p>🕓 15:00 → 20:00</p>
+        <p>🚐 Minivan Toyota - Capacité : 7</p>
+        <p>📏 370 km</p>
+        
+      </div>
+
+      <!-- Tabarka → Tunis -->
+      <div class="trajet-card">
+        <h3>Tabarka → Tunis</h3>
+        <div class="carte-container" id="map5"></div>
+        <p>🕓 14:00 → 17:00</p>
+        
+        <p>📏 160 km</p>
+        
+      </div>
+
+      <!-- Rafraf → Tunis -->
+      <div class="trajet-card">
+        <h3>Rafraf → Tunis</h3>
+        <div class="carte-container" id="map6"></div>
+        <p>🕓 16:00 → 18:00</p>
+        <p>📏 100 km</p>
+        
+      </div>
+    </div>
+    <center>
+      <button onclick="window.location.href='reserver.html'">Réserver</button>
+      <button class="annuler-btn" onclick="window.location.href='annuler.html'">Annuler</button>
+  </center>
+  
+  </section>
+<footer class="blue-section">
+    <div class="info">
+        <div class="services-info">
+            <h3>Nos Services</h3>
+            <p>Location de bungalows</p>
+            <p>Activités de groupe</p>
+            <p>Transports privés</p>
+        </div>
+
+        <div class="contact-info">
+            <h3>Contactez-nous</h3>
+            <p>Email : contact@bungoff.com</p>
+            <p>Téléphone : +216 94245514</p>
+            <p>Adresse : Ariana, Tunisie</p>
+        </div>
+
+        <div class="social-info">
+            <h3>Suivez-nous</h3>
+            <p>Facebook</p>
+            <p>Instagram</p>
+            <p>Twitter</p>
+        </div>
+
+        <div class="reserve-now">
+            <p>Réservez dès maintenant !</p>
+        </div>
+    </div>
+</footer>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+<script src="transport.js"></script>
+  
+
+
+</body>
+</html>
