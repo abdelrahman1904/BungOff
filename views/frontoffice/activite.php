@@ -1,3 +1,15 @@
+<?php
+require_once '../../models/config.php';
+
+try {
+    $pdo = config::getConnexion();
+    $stmt = $pdo->prepare("SELECT titre, photo FROM activite");
+    $stmt->execute();
+    $activites = $stmt->fetchAll();
+} catch (Exception $e) {
+    die("Erreur lors de la récupération des activités : " . $e->getMessage());
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -58,91 +70,17 @@
     <h3>Localisation des Activités</h3>
   </section>
   
-<main class="activities-container">
-    <!-- Carte Activité 1 -->
+  <main class="activities-container">
+  <?php foreach ($activites as $activite): ?>
     <div class="activity-card">
-      <img src="image/soiree.jpg" alt="Soirée">
+      <img src="image/<?php echo htmlspecialchars($activite['photo']); ?>" alt="<?php echo htmlspecialchars($activite['titre']); ?>">
       <div class="info-overlay">
-        <h3>Soirée</h3>
-        <button class="reserve-btn">plus de details</details></button>
+        <h3><?php echo htmlspecialchars($activite['titre']); ?></h3>
+        <a class="reserve-btn" href="details.php?titre=<?php echo urlencode($activite['titre']); ?>">plus de détails</a>
+
       </div>
     </div>
-
-    <!-- Carte Activité 2 -->
-    <div class="activity-card">
-      <img src="image/quad.jpg" alt="Quad">
-      <div class="info-overlay">
-        <h3>Quad Aventure</h3>
-        <button class="reserve-btn">plus de details</details></button>
-      </div>
-    </div>
-
-    <!-- Carte Activité 3 -->
-    <div class="activity-card">
-      <img src="image/cinema.jpg" alt="Cinéma">
-      <div class="info-overlay">
-        <h3>Cinéma en plein air</h3>
-        <button class="reserve-btn">plus de details</button>
-      </div>
-    </div>
-
-    <!-- Carte Activité 4 -->
-    <div class="activity-card">
-      <img src="image/parapante.jpg" alt="Parapente">
-      <div class="info-overlay">
-        <h3>Parapente</h3>
-        <button class="reserve-btn">plus de details</button>
-      </div>
-    </div>
-
- 
-    <!-- Carte Activité 7 -->
-    <div class="activity-card">
-      <img src="image/plongee3.jpg" alt="Plongée 3">
-      <div class="info-overlay">
-        <h3>Plongée sous-marine</h3>
-        <button class="reserve-btn">plus de details</button>
-      </div>
-    </div>
-
-    <!-- Carte Activité 8 -->
-    <div class="activity-card">
-      <img src="image/randonnee1.jpg" alt="Randonnée 1">
-      <div class="info-overlay">
-        <h3>Randonnée en montagne</h3>
-        <button class="reserve-btn">plus de details</button>
-      </div>
-    </div>
-
-    <!-- Carte Activité 10 -->
-    <div class="activity-card">
-      <img src="image/kayak.jpg" alt="Kayak">
-      <div class="info-overlay">
-        <h3>Kayak sur la mer</h3>
-        <button class="reserve-btn">plus de details</button>
-      </div>
-    </div>
-
-    <!-- Carte Activité 11 -->
-    <div class="activity-card">
-      <img src="image/yoga.jpg" alt="Yoga 1">
-      <div class="info-overlay">
-        <h3>Yoga au lever du soleil</h3>
-        <button class="reserve-btn">plus de details</button>
-      </div>
-    </div>
-
-  
-
-    <!-- Carte Activité 14 -->
-    <div class="activity-card">
-      <img src="image/creation.jpg" alt="Création">
-      <div class="info-overlay">
-        <h3>Atelier Créatif</h3>
-        
-        <button class="reserve-btn">plus de details</button>
-      </div>
-    </div>
+  <?php endforeach; ?>
 </main>
 
 <section class="blue-section">
