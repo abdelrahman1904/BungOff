@@ -3,8 +3,17 @@ require_once '../../models/config.php';
 
 try {
     $pdo = config::getConnexion();
-    $stmt = $pdo->prepare("SELECT titre, photo FROM activite");
-    $stmt->execute();
+    
+    // Vérifier si une recherche a été faite
+    if (isset($_POST['search']) && !empty($_POST['search'])) {
+        $search = $_POST['search'];
+        $stmt = $pdo->prepare("SELECT titre, photo FROM activite WHERE titre LIKE :search");
+        $stmt->execute(['search' => "%$search%"]);
+    } else {
+        $stmt = $pdo->prepare("SELECT titre, photo FROM activite");
+        $stmt->execute();
+    }
+    
     $activites = $stmt->fetchAll();
 } catch (Exception $e) {
     die("Erreur lors de la récupération des activités : " . $e->getMessage());
@@ -68,10 +77,18 @@ try {
   <section class="activities-map">
     <div id="map" style="height: 400px;"></div>
     <h3>Localisation des Activités</h3>
+    <!-- Formulaire de recherche -->
+    <form method="POST" action="#resultats" style="margin-top: 20px; text-align: center;">
+
+  <input type="text" name="search" placeholder="Rechercher une activité..." style="padding: 8px; width: 200px;">
+  <button type="submit" style="padding: 8px 12px; background-color: #3498db; color: white; border: none; cursor: pointer;">Rechercher</button>
+  <button type="button" onclick="window.location.href='activite.php';" style="padding: 8px 12px; background-color: #2ecc71; color: white; border: none; cursor: pointer; margin-left:10px;">Réinitialiser</button>
+</form>
+
   </section>
   
-  <main class="activities-container">
-  <?php foreach ($activites as $activite): ?>
+  <main id="resultats" class="activities-container">
+    <?php foreach ($activites as $activite): ?>
     <div class="activity-card">
       <img src="image/<?php echo htmlspecialchars($activite['photo']); ?>" alt="<?php echo htmlspecialchars($activite['titre']); ?>">
       <div class="info-overlay">

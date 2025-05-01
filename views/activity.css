@@ -188,3 +188,62 @@
     margin-left: 100px;
 }
 /* Uniformiser les titres des cartes */
+.card {
+    border-radius: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    overflow: hidden;
+    height: auto;
+    min-height: 120px;
+}
+.card-body {
+    padding: 20px;
+}
+
+
+.card h4 {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+canvas {
+    max-width: 100%;
+}
+
+#statistiquesChart:hover {
+    cursor: pointer;
+}
+.statistique-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0;
+}
+
+.statistique-card {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+.statistique-card:hover {
+    transform: translateY(-5px);
+}
+
+.statistique-header h3 {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.chart-container {
+    max-height: 300px;
+}
+
+canvas {
+    max-width: 100%;
+    height: auto;
+}

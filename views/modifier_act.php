@@ -13,7 +13,7 @@ if (isset($_GET['id'])) {
     exit();
 }
 
-// Traitement du formulaire
+// Traitement du formulaire sans validation PHP (cette partie est supprimée)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $titre = $_POST['titre'] ?? '';
     $guide = $_POST['guide'] ?? '';
@@ -22,59 +22,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $type = $_POST['type'] ?? '';
     $prix = $_POST['prix'] ?? '';
     $nbp = $_POST['nbp'] ?? '';
-    $erreurs = [];
 
-    // Validation
-    if (empty($titre) || empty($guide) || empty($description) || empty($duree) || empty($type) || empty($prix) || empty($nbp)) {
-        $erreurs[] = "Tous les champs doivent être remplis.";
+    // Gestion de la photo
+    if (isset($_FILES['photo']) && $_FILES['photo']['error'] === 0) {
+        $photo = $_FILES['photo']['name'];
+        move_uploaded_file($_FILES['photo']['tmp_name'], 'frontoffice/image/' . $photo);
     } else {
-        if (!is_numeric($duree) || $duree <= 0) {
-            $erreurs[] = "La durée doit être un nombre positif.";
-        }
-        if (!is_numeric($prix) || $prix <= 0) {
-            $erreurs[] = "Le prix doit être un nombre positif.";
-        }
-        if (!is_numeric($nbp) || $nbp <= 0) {
-            $erreurs[] = "Le nombre de participants doit être un nombre positif.";
-        }
-        if (preg_match('/\d/', $titre)) {
-            $erreurs[] = "Le titre ne doit pas contenir de chiffres.";
-        }
-        if (preg_match('/\d/', $guide)) {
-            $erreurs[] = "Le nom du guide ne doit pas contenir de chiffres.";
-        }
-
-        // Vérifie que le titre n'existe pas pour une autre activité
-        if ($titre !== $activite['titre']) {
-            $autreActivite = $activiteC->recupererActiviteParTitre($titre);
-            if ($autreActivite && $autreActivite['id_activite'] != $id) {
-                $erreurs[] = "Le titre de l'activité existe déjà.";
-            }
-        }
-        
+        $photo = $activite['photo']; // ancienne photo
     }
 
-    // Si pas d'erreurs, modifier l'activité
-    if (empty($erreurs)) {
-        // Gestion de la photo
-        if (isset($_FILES['photo']) && $_FILES['photo']['error'] === 0) {
-            $photo = $_FILES['photo']['name'];
-            move_uploaded_file($_FILES['photo']['tmp_name'], 'frontoffice/image/' . $photo);
-        } else {
-            $photo = $activite['photo']; // ancienne photo
-        }
+    $a = new Activite($titre, $guide, $description, $duree, $type, $prix, $photo, $nbp);
+    $activiteC->modifierActivite($titre, $guide, $description, $duree, $type, $prix, $photo, $nbp, $id);
 
-        $a = new Activite($titre, $guide, $description, $duree, $type, $prix, $photo, $nbp);
-        $activiteC->modifierActivite($titre, $guide, $description, $duree, $type, $prix, $photo, $nbp, $id);
-
-        header("Location: consulter_act.php");
-        exit();
-    } else {
-        // Affiche les erreurs
-        foreach ($erreurs as $err) {
-            echo "<p style='color:red;'>$err</p>";
-        }
-    }
+    header("Location: consulter_act.php");
+    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -115,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <a href="activity.html"><i class="fas fa-tachometer-alt"></i> dashboard</a>
         <a href="#"><i class="fas fa-user"></i> Utilisateurs</a>
         <a href="#"><i class="fas fa-home"></i> Bungalows</a>
-        <a href="new_act.html"><i class="fas fa-campground"></i> Activités</a>
+        <a href="new_act.php"><i class="fas fa-campground"></i> Activités</a>
         <a href="#"><i class="fas fa-car"></i> Transport</a>
         <a href="#"><i class="fas fa-credit-card"></i> Paiement</a>
         <a href="#"><i class="fas fa-star"></i> Avis</a>
@@ -248,6 +209,7 @@ document.getElementById('activityForm').addEventListener('submit', function (eve
             alert(err);
         });
     } else {
+        alert('Modification réussie !');
         this.submit();
     }
 });

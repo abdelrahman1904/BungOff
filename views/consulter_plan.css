@@ -184,15 +184,24 @@
     background-color: #2980b9;
 }
 
-.export-btns button {
+.export-btn {
     background-color: #e67e22;
     color: white;
     border: none;
-    padding: 10px 15px;
+    padding: 10px 20px;
     border-radius: 30px;
+    text-decoration: none;
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s, transform 0.2s;
 }
 
-.export-btns button:hover {
+.export-btn:hover {
     background-color: #d35400;
+    transform: scale(1.05);
+    text-decoration: none;
 }

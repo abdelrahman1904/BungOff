@@ -135,4 +135,53 @@
   .add-activity-link:hover {
     background-color: #c5dbca;
   }
-  
+  /* Styles pour les messages d'erreur */
+.text-danger {
+    color: #fcfcfc;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.text-danger::before {
+    content: "\f071"; /* Icône d'avertissement FontAwesome */
+    font-family: 'FontAwesome';
+    margin-right: 8px;
+    color: #ffffff;
+    font-size: 1.2rem;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-group.focused input,
+.form-group.focused textarea {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Animation d'apparition des messages d'erreur */
+.text-danger {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Style pour le champ de formulaire en focus */
+input:focus, textarea:focus, select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
