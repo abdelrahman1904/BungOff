@@ -1,6 +1,5 @@
 <?php
-require_once __DIR__.'/../config.php';
-require_once __DIR__.'/../controller/AvisController.php';
+require_once '../../controller/aviscontroller.php';
 
 $controller = new AvisController();
 
