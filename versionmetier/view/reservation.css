@@ -1,0 +1,55 @@
+/* Style général du conteneur */
+.bungalow-container {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+}
+
+.bungalow-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.bungalow-header h1 {
+    color: #34495e;
+    font-size: 28px;
+    margin: 0;
+}
+
+.bungalow-header h1 i {
+    margin-right: 15px;
+    color: #3498db;
+}
+
+/* Tableau */
+.activities-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.activities-table th, .activities-table td {
+    padding: 12px 20px;
+    text-align: left;
+    font-size: 16px;
+}
+
+.activities-table th {
+    background-color: #3498db;
+    color: white;
+}
+
+.activities-table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+.activities-table tbody tr:hover {
+    background-color: #ecf0f1;
+}
