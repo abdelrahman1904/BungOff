@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Barre latérale */
 .sidebar {
     position: fixed;
@@ -227,3 +228,374 @@
   }
   
 
+=======
+/* Réinitialisation et variables */
+:root {
+    --primary-blue: #126cb6;
+    --accent-beige: #b49786;
+    --light-bg: #f5f5f5;
+    --dark-text: #333;
+    --white: #fff;
+    --light-text: #ddd;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+  }
+  
+  /* Styles généraux */
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: var(--light-bg);
+    color: var(--dark-text);
+    line-height: 1.6;
+  }
+  
+  /* En-tête amélioré */
+  header {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 5%;
+    height: 80px;
+    position: fixed;
+    width: 90%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+  }
+  
+  header.scrolled {
+    height: 70px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  
+  .logo-img {
+    width: 40px;
+    height: 40px;
+    margin-right: 12px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent-beige);
+  }
+  
+  .off {
+    color: var(--accent-beige);
+    font-weight: 800;
+  }
+  
+  /* Navigation améliorée */
+  nav ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+  }
+  
+  nav ul li {
+    margin: 0 12px;
+    position: relative;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: var(--white);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: var(--transition);
+  }
+  
+  nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+  
+  nav ul li a i {
+    margin-right: 8px;
+    color: var(--accent-beige);
+    font-size: 0.9em;
+  }
+  
+  /* Section des bungalows améliorée */
+  .bungalow-list {
+    padding: 100px 5% 80px;
+    text-align: center;
+    background-color: var(--white);
+  }
+  
+  .bungalow-list h1 {
+    color: var(--primary-blue);
+    font-size: 2.8rem;
+    margin-bottom: 60px;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .bungalow-list h1::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--accent-beige);
+    border-radius: 2px;
+  }
+  
+  .bungalows-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .bungalow-item {
+    background-color: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    position: relative;
+  }
+  
+  .bungalow-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  }
+  
+  .bungalow-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: var(--transition);
+  }
+  
+  .bungalow-item:hover .bungalow-image {
+    transform: scale(1.05);
+  }
+  
+  .bungalow-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: var(--accent-beige);
+    color: var(--white);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
+  .bungalow-info {
+    padding: 20px;
+    text-align: left;
+  }
+  
+  .bungalow-info h3 {
+    color: var(--primary-blue);
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  
+  .bungalow-location {
+    display: flex;
+    align-items: center;
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .bungalow-location i {
+    margin-right: 5px;
+    color: var(--accent-beige);
+  }
+  
+  .bungalow-info p {
+    color: var(--dark-text);
+    font-size: 15px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  
+  .bungalow-features {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+  
+  .bungalow-feature {
+    display: flex;
+    align-items: center;
+  }
+  
+  .bungalow-feature i {
+    margin-right: 5px;
+    color: var(--accent-beige);
+  }
+  
+  .bungalow-price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin-bottom: 15px;
+  }
+  
+  .bungalow-price span {
+    font-size: 14px;
+    font-weight: normal;
+    color: #666;
+  }
+  
+  .bungalow-button {
+    display: inline-block;
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-blue);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    text-align: center;
+    transition: var(--transition);
+    border: none;
+    cursor: pointer;
+  }
+  
+  .bungalow-button:hover {
+    background-color: #0d5a9e;
+  }
+  
+  /* Section bleue améliorée */
+  .blue-section {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    padding: 60px 5%;
+  }
+  
+  .info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .services-info, .contact-info, .social-info {
+    margin: 10px 0;
+  }
+  
+  .services-info h3, .contact-info h3, .social-info h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent-beige);
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+  }
+  
+  .services-info h3::after, 
+  .contact-info h3::after, 
+  .social-info h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background-color: var(--accent-beige);
+  }
+  
+  .services-info p, .contact-info p, .social-info p {
+    color: var(--light-text);
+    font-size: 15px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .services-info p i, 
+  .contact-info p i, 
+  .social-info p i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+  }
+  
+  .reserve-now {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  
+  .reserve-now p {
+    font-weight: 700;
+    color: var(--accent-beige);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: right;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    nav ul {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    header {
+      padding: 15px 20px;
+    }
+    
+    .bungalow-list h1 {
+      font-size: 2.2rem;
+    }
+    
+    .reserve-now {
+      align-items: center;
+      text-align: center;
+      margin-top: 30px;
+    }
+    
+    .reserve-now p {
+      text-align: center;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .logo {
+      font-size: 24px;
+    }
+    
+    .logo-img {
+      width: 30px;
+      height: 30px;
+    }
+    
+    .extra-info {
+      gap: 10px;
+    }
+    
+    .weather {
+      display: none;
+    }
+  }
+>>>>>>> 3ed224d383aeb07817a76fb5b79aa03e3fa17f35
