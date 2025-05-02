@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_reponse'])) {
     
     if ($result) {
         $success_message = "Réponse ajoutée avec succès!";
+        header("Location: index.php"); // Redirection après succès
     } else {
         $error_message = "Erreur lors de l'ajout de la réponse";
     }
@@ -23,15 +24,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_reponse'])) {
 
 $avisList = $avisController->listAvis();
 $reponses = $reponseController->getAllWithAvis();
+
+// Fetch note distribution using the listAvisrate method
+$noteDistribution = [];
+try {
+    $noteDistribution = $avisController->listAvisrate();
+} catch (Exception $e) {
+    echo "<script>alert('Erreur: " . htmlspecialchars($e->getMessage()) . "');</script>";
+}
+
+// Encode $noteDistribution for JavaScript
+$encodedNoteDistribution = json_encode($noteDistribution);
+if ($encodedNoteDistribution === false) {
+    $encodedNoteDistribution = '[]'; // Fallback to an empty array if encoding fails
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Système de gestion d'avis et réponses</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Système de gestion d'avis et réponses</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .form-container {
             display: none;
@@ -45,10 +63,54 @@ $reponses = $reponseController->getAllWithAvis();
             margin-left: 5px;
         }
     </style>
+  <style>
+    .admin-section {
+      display: none;
+      margin-top: 30px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container mt-4">
-        <h1 class="mb-4">Gestion des avis et réponses</h1>
+
+  <!-- Barre du haut -->
+   
+  <div class="top-bar">
+    
+    <div class="logo">Bung<span class="off">OFF</span></div>
+    <div class="toggle-sidebar-icon me-3" onclick="toggleSidebar()" style="cursor: pointer;">
+        <i class="fas fa-bars"></i>
+      </div>
+      
+  </div>
+    <div class="right-icons">
+      <form class="d-inline-flex">
+        <input type="text" class="form-control" placeholder="Recherche...">
+        <button type="submit" class="btn btn-primary ms-2"><i class="fas fa-search"></i></button>
+      </form>
+      <div class="login-icon d-inline-flex ms-3">
+        <i class="fas fa-user"></i>
+      </div>
+    </div>
+   
+
+  <!-- Barre latérale -->
+  <div class="sidebar">
+    <a href="index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <a href="#"><i class="fas fa-user"></i> Utilisateurs</a>
+    <a href="#"><i class="fas fa-home"></i> Bungalows</a>
+    <a href="#"><i class="fas fa-campground"></i> Activités</a>
+    <a href="btransport.html"><i class="fas fa-car"></i> Transports</a>
+    <a href="#"><i class="fas fa-credit-card"></i> Paiement</a>
+    <a href="#"><i class="fas fa-star"></i> Avis</a>
+    <div class="logout">
+      <a href="#"><i class="fas fa-sign-out-alt"></i> Se Déconnecter</a>
+    </div>
+  </div>
+
+  <!-- Contenu principal -->
+
+  <div class="container">
+        <h1 style="margin-top: 60px;">Gestion des avis et réponses</h1>
 
         <?php if (isset($success_message)): ?>
             <div class="alert alert-success"><?= $success_message ?></div>
@@ -164,7 +226,13 @@ $reponses = $reponseController->getAllWithAvis();
                 </table>
             </div>
         </div>
-    </div>
+
+        <!-- Button to display statistics -->
+        <button id="btnStatistiques" class="btn btn-info mb-4">Afficher les Statistiques</button>
+
+        <!-- Canvas for the pie chart -->
+        <canvas id="pieChart" style="max-width: 600px; margin: 20px auto; display: none;"></canvas>
+ </div>
 
     <script>
         function showReponseForm(userId) {
@@ -176,6 +244,80 @@ $reponses = $reponseController->getAllWithAvis();
         function hideReponseForm() {
             document.getElementById('reponse-form').style.display = 'none';
         }
+
+        // Extract note distribution from PHP data
+        const noteDistribution = <?php echo $encodedNoteDistribution; ?>;
+
+        // Handle statistics button click
+        document.getElementById('btnStatistiques').addEventListener('click', function() {
+            // Ensure noteDistribution is an array
+            if (!Array.isArray(noteDistribution) || noteDistribution.length === 0) {
+                alert('Impossible de charger les statistiques. Les données sont invalides ou vides.');
+                return;
+            }
+
+            const labels = [];
+            const data = [];
+            const backgroundColors = ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50', '#9966FF'];
+
+            // Prepare data for the pie chart
+            noteDistribution.forEach((item, index) => {
+                labels.push(`Note ${item.Note} ★`);
+                data.push(item.count);
+            });
+
+            // Display the pie chart
+            const ctx = document.getElementById('pieChart').getContext('2d');
+            document.getElementById('pieChart').style.display = 'block'; // Show the canvas
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Statistiques des Notes',
+                        data: data,
+                        backgroundColor: backgroundColors.slice(0, labels.length),
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    return `${label}: ${value} avis`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
     </script>
+
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
