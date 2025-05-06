@@ -3,15 +3,56 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once '../Controllers/promotion_controller.php';
+require_once '../Controllers/controller.php';
+require_once '../lib/pdf/fpdf.php'; // Inclure FPDF
+
 $controller = new PromotionController();
 $promotions = $controller->handleRequest();
 $editPromotion = null;
+
+// Action pour générer le PDF
+if (isset($_GET['action']) && $_GET['action'] == 'generate_pdf') {
+    $pdf = new FPDF();
+    $pdf->AddPage();
+    $pdf->SetFont('Arial', 'B', 16);
+    $pdf->Cell(0, 10, 'Liste des Promotions', 0, 1, 'C');
+    $pdf->Ln(10);
+
+    // En-têtes du tableau
+    $pdf->SetFont('Arial', 'B', 12);
+    $pdf->Cell(15, 10, 'ID', 1);
+    $pdf->Cell(30, 10, 'Titre', 1);
+    $pdf->Cell(40, 10, 'Description', 1);
+    $pdf->Cell(20, 10, 'Pourcentage', 1);
+    $pdf->Cell(25, 10, 'Code Promo', 1);
+    $pdf->Cell(25, 10, 'Date Debut', 1);
+    $pdf->Cell(25, 10, 'Date Fin', 1);
+    $pdf->Cell(30, 10, 'Campagne', 1);
+    $pdf->Ln();
+
+    // Données des promotions
+    $pdf->SetFont('Arial', '', 12);
+    foreach ($promotions as $promotion) {
+        $pdf->Cell(15, 10, $promotion['idP'], 1);
+        $pdf->Cell(30, 10, substr($promotion['titreP'], 0, 15) . '...', 1);
+        $pdf->Cell(40, 10, substr($promotion['descriptionP'], 0, 20) . '...', 1);
+        $pdf->Cell(20, 10, $promotion['pourcentage'] . '%', 1);
+        $pdf->Cell(25, 10, $promotion['codePromo'] ?: 'N/A', 1);
+        $pdf->Cell(25, 10, $promotion['date_debutP'], 1);
+        $pdf->Cell(25, 10, $promotion['date_finP'], 1);
+        $pdf->Cell(30, 10, substr($promotion['campaign_name'], 0, 15) . '...', 1);
+        $pdf->Ln();
+    }
+
+    $pdf->Output('D', 'promotions.pdf'); // Télécharge le PDF
+    exit();
+}
+
 if (isset($_GET['action']) && $_GET['action'] == 'edit' && isset($_GET['idP'])) {
     $editPromotion = $controller->getPromotion($_GET['idP']);
 }
 
 // Fetch all campaigns for the dropdown
-require_once '../Controllers/controller.php';
 $campaignController = new CompagneController();
 $campaigns = $campaignController->handleRequest();
 ?>
@@ -31,8 +72,8 @@ $campaigns = $campaignController->handleRequest();
     <div class="top-bar">
         <div class="logo">Bung<span class="off">OFF</span></div>
         <div class="right-icons">
-            <form class="search-form d-inline-flex">
-                <input type="text" class="form-control" placeholder="Recherche...">
+            <form class="search-form d-inline-flex" action="manage_promotion.php" method="GET">
+                <input type="text" class="form-control" name="search" placeholder="Rechercher par titre ou code..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-search"></i>
                 </button>
@@ -114,6 +155,11 @@ $campaigns = $campaignController->handleRequest();
             </div>
         </div>
 
+        <!-- Bouton pour générer le PDF -->
+        <div class="mb-4">
+            <a href="manage_promotion.php?action=generate_pdf" class="btn btn-success"><i class="fas fa-file-pdf"></i> Générer PDF</a>
+        </div>
+
         <!-- Tableau des promotions -->
         <div class="card">
             <div class="card-body">
@@ -121,13 +167,13 @@ $campaigns = $campaignController->handleRequest();
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Titre</th>
+                            <th><a href="?sort=idP&order=<?php echo (isset($_GET['sort']) && $_GET['sort'] == 'idP' && isset($_GET['order']) && $_GET['order'] == 'asc') ? 'desc' : 'asc'; ?>">ID</a></th>
+                            <th><a href="?sort=titreP&order=<?php echo (isset($_GET['sort']) && $_GET['sort'] == 'titreP' && isset($_GET['order']) && $_GET['order'] == 'asc') ? 'desc' : 'asc'; ?>">Titre</a></th>
                             <th>Description</th>
-                            <th>Pourcentage</th>
+                            <th><a href="?sort=pourcentage&order=<?php echo (isset($_GET['sort']) && $_GET['sort'] == 'pourcentage' && isset($_GET['order']) && $_GET['order'] == 'asc') ? 'desc' : 'asc'; ?>">Pourcentage</a></th>
                             <th>Code Promo</th>
-                            <th>Date Début</th>
-                            <th>Date Fin</th>
+                            <th><a href="?sort=date_debutP&order=<?php echo (isset($_GET['sort']) && $_GET['sort'] == 'date_debutP' && isset($_GET['order']) && $_GET['order'] == 'asc') ? 'desc' : 'asc'; ?>">Date Début</a></th>
+                            <th><a href="?sort=date_finP&order=<?php echo (isset($_GET['sort']) && $_GET['sort'] == 'date_finP' && isset($_GET['order']) && $_GET['order'] == 'asc') ? 'desc' : 'asc'; ?>">Date Fin</a></th>
                             <th>Campagne</th>
                             <th>Actions</th>
                         </tr>

@@ -33,10 +33,10 @@ error_reporting(E_ALL);
             transform: scale(1.05);
         }
         .btn-campaign {
-            background-color: #007bff;
+            background-color:rgb(63, 131, 203);
         }
         .btn-promotion {
-            background-color: #28a745;
+            background-color:rgb(59, 189, 89);
         }
     </style>
 </head>

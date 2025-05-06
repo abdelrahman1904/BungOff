@@ -65,7 +65,10 @@ class PromotionController {
 
             case 'list':
             default:
-                return $this->model->readAll();
+                $search = isset($_GET['search']) ? $_GET['search'] : '';
+                $sort = isset($_GET['sort']) ? $_GET['sort'] : 'idP';
+                $order = isset($_GET['order']) ? $_GET['order'] : 'ASC';
+                return $this->model->readAll($search, $sort, $order);
         }
     }
 

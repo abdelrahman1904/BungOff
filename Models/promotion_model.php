@@ -25,11 +25,26 @@ class Promotion {
     }
 
     // Read all promotions with associated campaign name
-    public function readAll() {
+    public function readAll($search = '', $sort = 'idP', $order = 'ASC') {
         $sql = "SELECT p.*, c.nom AS campaign_name 
                 FROM promotionsP p 
                 LEFT JOIN compagne c ON p.idC = c.id";
-        $stmt = $this->pdo->query($sql);
+        
+        // Add search conditions
+        $params = [];
+        if ($search) {
+            $sql .= " WHERE p.titreP LIKE :search OR p.codePromo LIKE :search";
+            $params[':search'] = '%' . $search . '%';
+        }
+
+        // Add sorting
+        $allowedSorts = ['idP', 'titreP', 'pourcentage', 'date_debutP', 'date_finP'];
+        $sort = in_array($sort, $allowedSorts) ? $sort : 'idP';
+        $order = strtoupper($order) === 'DESC' ? 'DESC' : 'ASC';
+        $sql .= " ORDER BY p.$sort $order";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($params);
         return $stmt->fetchAll();
     }
 

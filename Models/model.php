@@ -21,9 +21,24 @@ class Compagne {
     }
 
     // Read all campaigns
-    public function readAll() {
+    public function readAll($search = '', $sort = 'id', $order = 'ASC') {
         $sql = "SELECT * FROM compagne";
-        $stmt = $this->pdo->query($sql);
+        
+        // Add search conditions
+        $params = [];
+        if ($search) {
+            $sql .= " WHERE nom LIKE :search";
+            $params[':search'] = '%' . $search . '%';
+        }
+
+        // Add sorting
+        $allowedSorts = ['id', 'nom', 'date_debut', 'date_fin'];
+        $sort = in_array($sort, $allowedSorts) ? $sort : 'id';
+        $order = strtoupper($order) === 'DESC' ? 'DESC' : 'ASC';
+        $sql .= " ORDER BY $sort $order";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($params);
         return $stmt->fetchAll();
     }
 

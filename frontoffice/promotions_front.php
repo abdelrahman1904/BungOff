@@ -13,6 +13,9 @@ $campaigns = $campaignController->handleRequest();
 
 // Fetch promotions
 $promotionController = new PromotionController();
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+$sort = isset($_GET['sort']) ? $_GET['sort'] : 'idP';
+$order = isset($_GET['order']) ? $_GET['order'] : 'ASC';
 $promotions = $promotionController->handleRequest();
 
 // Group promotions by campaign
@@ -227,6 +230,19 @@ foreach ($promotions as $promotion) {
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
+        /* Sort Dropdown */
+        .sort-container {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .sort-container select {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .promotion-card {
@@ -259,7 +275,10 @@ foreach ($promotions as $promotion) {
                     <div class="temperature">22°C</div>
                 </div>
             </div>
-            <i class="fas fa-search search-icon"></i>
+            <form action="promotions_front.php" method="GET" style="display: inline-flex;">
+                <input type="text" name="search" placeholder="Rechercher une promotion..." value="<?php echo htmlspecialchars($search); ?>" style="padding: 5px; border-radius: 5px; border: 1px solid #ddd;">
+                <button type="submit" class="search-icon"><i class="fas fa-search"></i></button>
+            </form>
             <i class="fas fa-user login-icon"></i>
         </div>
     </header>
@@ -267,7 +286,19 @@ foreach ($promotions as $promotion) {
     <!-- Promotions Section -->
     <section class="promotions-section">
         <h2 class="section-title animate__animated animate__fadeIn">Nos Promotions</h2>
-        <p class="animate__animated animate__fadeIn" style="text-align: center; margin-bottom: 50px;">Découvrez nos offres exclusives pour vos prochaines vacances</p>
+        <p class="animate__animated animate__fadeIn" style="text-align: center; margin-bottom: 20px;">Découvrez nos offres exclusives pour vos prochaines vacances</p>
+        
+        <div class="sort-container">
+            <form action="promotions_front.php" method="GET">
+                <select name="sort" onchange="this.form.submit()">
+                    <option value="idP" <?php echo $sort == 'idP' ? 'selected' : ''; ?>>Trier par ID</option>
+                    <option value="pourcentage" <?php echo $sort == 'pourcentage' ? 'selected' : ''; ?>>Trier par Pourcentage</option>
+                    <option value="date_debutP" <?php echo $sort == 'date_debutP' ? 'selected' : ''; ?>>Trier par Date de Début</option>
+                </select>
+                <input type="hidden" name="order" value="<?php echo $order; ?>">
+                <input type="hidden" name="search" value="<?php echo htmlspecialchars($search); ?>">
+            </form>
+        </div>
 
         <?php if (empty($campaigns)): ?>
             <p>Aucune campagne disponible pour le moment.</p>

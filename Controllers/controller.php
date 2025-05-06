@@ -46,16 +46,19 @@ class CompagneController {
                 $id = $_GET['id'];
                 if ($this->model->delete($id)) {
                     header('Location: manage_campaign.php?success=Campagne supprimée');
-                    exit(); // Ensure script stops after redirect
+                    exit();
                 } else {
                     header('Location: manage_campaign.php?error=Erreur lors de la suppression');
-                    exit(); // Ensure script stops after redirect
+                    exit();
                 }
                 break;
 
             case 'list':
             default:
-                return $this->model->readAll();
+                $search = isset($_GET['search']) ? $_GET['search'] : '';
+                $sort = isset($_GET['sort']) ? $_GET['sort'] : 'id';
+                $order = isset($_GET['order']) ? $_GET['order'] : 'ASC';
+                return $this->model->readAll($search, $sort, $order);
         }
     }
 

@@ -3,9 +3,44 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once '../Controllers/controller.php';
+require_once '../lib/pdf/fpdf.php'; // Inclure FPDF
+
 $controller = new CompagneController();
 $compagnes = $controller->handleRequest();
 $editCompagne = null;
+
+// Action pour générer le PDF
+if (isset($_GET['action']) && $_GET['action'] == 'generate_pdf') {
+    $pdf = new FPDF();
+    $pdf->AddPage();
+    $pdf->SetFont('Arial', 'B', 16);
+    $pdf->Cell(0, 10, 'Liste des Campagnes', 0, 1, 'C');
+    $pdf->Ln(10);
+
+    // En-têtes du tableau
+    $pdf->SetFont('Arial', 'B', 12);
+    $pdf->Cell(20, 10, 'ID', 1);
+    $pdf->Cell(40, 10, 'Nom', 1);
+    $pdf->Cell(60, 10, 'Description', 1);
+    $pdf->Cell(30, 10, 'Date Debut', 1);
+    $pdf->Cell(30, 10, 'Date Fin', 1);
+    $pdf->Ln();
+
+    // Données des campagnes
+    $pdf->SetFont('Arial', '', 12);
+    foreach ($compagnes as $compagne) {
+        $pdf->Cell(20, 10, $compagne['id'], 1);
+        $pdf->Cell(40, 10, $compagne['nom'], 1);
+        $pdf->Cell(60, 10, substr($compagne['description'], 0, 30) . '...', 1); // Limiter la longueur
+        $pdf->Cell(30, 10, $compagne['date_debut'], 1);
+        $pdf->Cell(30, 10, $compagne['date_fin'], 1);
+        $pdf->Ln();
+    }
+
+    $pdf->Output('D', 'campagnes.pdf'); // Télécharge le PDF
+    exit();
+}
+
 if (isset($_GET['action']) && $_GET['action'] == 'edit' && isset($_GET['id'])) {
     $editCompagne = $controller->getCompagne($_GET['id']);
 }
@@ -26,8 +61,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit' && isset($_GET['id'])) {
     <div class="top-bar">
         <div class="logo">Bung<span class="off">OFF</span></div>
         <div class="right-icons">
-            <form class="search-form d-inline-flex">
-                <input type="text" class="form-control" placeholder="Recherche...">
+            <form class="search-form d-inline-flex" action="manage_campaign.php" method="GET">
+                <input type="text" class="form-control" name="search" placeholder="Rechercher par nom..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-search"></i>
                 </button>
@@ -57,12 +92,12 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit' && isset($_GET['id'])) {
         <h1>Gestion des Campagnes</h1>
 
         <!-- Messages de succès ou d'erreur -->
-<?php if (isset($_GET['success'])): ?>
-    <div class="alert alert-success"><?php echo htmlspecialchars($_GET['success']); ?></div>
-<?php endif; ?>
-<?php if (isset($_GET['error'])): ?>
-    <div class="alert alert-danger"><?php echo htmlspecialchars($_GET['error']); ?></div>
-<?php endif; ?>
+        <?php if (isset($_GET['success'])): ?>
+            <div class="alert alert-success"><?php echo htmlspecialchars($_GET['success']); ?></div>
+        <?php endif; ?>
+        <?php if (isset($_GET['error'])): ?>
+            <div class="alert alert-danger"><?php echo htmlspecialchars($_GET['error']); ?></div>
+        <?php endif; ?>
 
         <!-- Formulaire pour créer/modifier une campagne -->
         <div class="card mb-4">
@@ -90,6 +125,11 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit' && isset($_GET['id'])) {
             </div>
         </div>
 
+        <!-- Bouton pour générer le PDF -->
+        <div class="mb-4">
+            <a href="manage_campaign.php?action=generate_pdf" class="btn btn-success"><i class="fas fa-file-pdf"></i> Générer PDF</a>
+        </div>
+
         <!-- Tableau des campagnes -->
         <div class="card">
             <div class="card-body">
@@ -97,11 +137,11 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit' && isset($_GET['id'])) {
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Nom</th>
+                            <th><a href="?sort=id&order=<?php echo (isset($_GET['sort']) && $_GET['sort'] == 'id' && isset($_GET['order']) && $_GET['order'] == 'asc') ? 'desc' : 'asc'; ?>">ID</a></th>
+                            <th><a href="?sort=nom&order=<?php echo (isset($_GET['sort']) && $_GET['sort'] == 'nom' && isset($_GET['order']) && $_GET['order'] == 'asc') ? 'desc' : 'asc'; ?>">Nom</a></th>
                             <th>Description</th>
-                            <th>Date Début</th>
-                            <th>Date Fin</th>
+                            <th><a href="?sort=date_debut&order=<?php echo (isset($_GET['sort']) && $_GET['sort'] == 'date_debut' && isset($_GET['order']) && $_GET['order'] == 'asc') ? 'desc' : 'asc'; ?>">Date Début</a></th>
+                            <th><a href="?sort=date_fin&order=<?php echo (isset($_GET['sort']) && $_GET['sort'] == 'date_fin' && isset($_GET['order']) && $_GET['order'] == 'asc') ? 'desc' : 'asc'; ?>">Date Fin</a></th>
                             <th>Actions</th>
                         </tr>
                     </thead>
