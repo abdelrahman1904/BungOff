@@ -23,6 +23,41 @@ $promotionsByCampaign = [];
 foreach ($promotions as $promotion) {
     $promotionsByCampaign[$promotion['idC']][] = $promotion;
 }
+
+// Créer le dossier qrcodes s'il n'existe pas
+$qrcodesDir = 'qrcodes/';
+if (!file_exists($qrcodesDir)) {
+    mkdir($qrcodesDir, 0777, true);
+}
+
+// Nettoyer les anciens QR Codes
+$oldQrFiles = glob($qrcodesDir . 'campaign_*.png');
+foreach ($oldQrFiles as $oldFile) {
+    unlink($oldFile);
+}
+
+// Générer un QR Code pour chaque campagne avec QRCode Monkey API
+$baseUrl = "http://192.168.60.1/web10-Copie/frontoffice";
+foreach ($campaigns as &$campaign) {
+    $qrCodeFile = $qrcodesDir . 'campaign_' . $campaign['id'] . '.png';
+    $campaign['qrCodeFile'] = $qrCodeFile;
+
+    // Contenu du QR Code : lien vers la page d'affiche de la campagne
+    $qrContent = urlencode($baseUrl . "/campaign_poster.php?id=" . $campaign['id']);
+
+    // Générer le QR Code via QRCode Monkey API et sauvegarder l'image
+    if (!file_exists($qrCodeFile)) {
+        $qrcodeMonkeyUrl = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" . $qrContent;
+        $imageContent = @file_get_contents($qrcodeMonkeyUrl);
+        if ($imageContent !== false && file_put_contents($qrCodeFile, $imageContent)) {
+            error_log("QR Code généré avec succès pour la campagne ID " . $campaign['id']);
+        } else {
+            error_log("Échec de la génération du QR Code pour la campagne ID " . $campaign['id']);
+        }
+    }
+}
+unset($campaign);
+//http://192.168.60.1/web10-Copie/frontoffice/campaign_poster.php?id=101 test poster
 ?>
 
 <!DOCTYPE html>
@@ -169,6 +204,18 @@ foreach ($promotions as $promotion) {
             color: #333;
         }
 
+        .campaign-header .qr-code {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .campaign-header .qr-code img {
+            width: 100px;
+            height: 100px;
+            border: 2px solid #4a90e2;
+            border-radius: 10px;
+        }
+
         .promotions-container {
             display: flex;
             justify-content: center;
@@ -248,6 +295,11 @@ foreach ($promotions as $promotion) {
             .promotion-card {
                 width: 100%;
             }
+
+            .campaign-header .qr-code img {
+                width: 80px;
+                height: 80px;
+            }
         }
     </style>
 </head>
@@ -308,6 +360,13 @@ foreach ($promotions as $promotion) {
                     <div class="campaign-header">
                         <h3><?php echo htmlspecialchars($campaign['nom']); ?></h3>
                         <p>Du <?php echo htmlspecialchars($campaign['date_debut']); ?> au <?php echo htmlspecialchars($campaign['date_fin']); ?></p>
+                        <div class="qr-code">
+                            <?php if (file_exists($campaign['qrCodeFile'])): ?>
+                                <img src="<?php echo $campaign['qrCodeFile']; ?>" alt="QR Code pour <?php echo htmlspecialchars($campaign['nom']); ?>">
+                            <?php else: ?>
+                                <p style="color: red;">Erreur lors de la génération du QR Code pour <?php echo htmlspecialchars($campaign['nom']); ?>. Vérifiez votre connexion ou les logs d'erreurs.</p>
+                            <?php endif; ?>
+                        </div>
                     </div>
                     <div class="promotions-container">
                         <?php
