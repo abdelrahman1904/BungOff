@@ -1,0 +1,99 @@
+.bungalow-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Aligne les éléments à chaque extrémité */
+    padding: 20px;
+    background-color: #e9ecef; /* Couleur de fond grise claire */
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.bungalow-header h1 {
+    color: #0d6efd; /* Texte bleu pour le titre */
+    margin: 0; /* Supprime la marge par défaut du h1 */
+}
+
+.add-activity-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 15px;
+    background-color: #28a745; /* Vert pour le bouton de retour */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.add-activity-link:hover {
+    background-color: #218838;
+}
+
+.table-responsive {
+    background-color: #f8f9fa; /* Fond gris très clair pour le tableau */
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.table-dark th {
+    background-color: #0d6efd; /* Bleu pour l'en-tête du tableau */
+    color: white;
+    border-color: #0a58ca;
+}
+
+.table-bordered {
+    border: 1px solid #28a745; /* Bordure verte pour le tableau */
+}
+
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid #28a745; /* Bordure verte pour les cellules */
+}
+
+.btn-warning {
+    background-color: #ffc107; /* Jaune, mais on va le changer en bleu clair */
+    border-color: #ffc107;
+    color: #212529;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+    border-color: #d39e00;
+    color: #212529;
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Rouge, mais on va le changer en vert clair */
+    border-color: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+    color: white;
+}
+
+/* Nouvelles couleurs pour les boutons */
+.btn-modifier {
+    background-color: #17a2b8; /* Bleu clair */
+    border-color: #17a2b8;
+    color: white;
+}
+
+.btn-modifier:hover {
+    background-color: #138496;
+    border-color: #117a8b;
+    color: white;
+}
+
+.btn-supprimer {
+    background-color: #28a745; /* Vert clair */
+    border-color: #28a745;
+    color: white;
+}
+
+.btn-supprimer:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+    color: white;
+}

@@ -1,0 +1,169 @@
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #1f2833;
+    padding-top: 80px;
+    transition: width 0.3s;
+}
+
+.sidebar a {
+    display: block;
+    padding: 15px 25px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: #34495e;
+}
+
+.sidebar a i {
+    margin-right: 10px;
+}
+
+/* Barre en haut */
+.top-bar {
+    background-color: #34495e;
+    padding: 20px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    height: 80px;
+}
+
+.top-bar .logo {
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-left: 260px;
+    transition: margin-left 0.3s;
+}
+
+.top-bar .off {
+    color: #b49786;
+}
+
+.top-bar .search-form input {
+    width: 300px;
+}
+
+.top-bar .search-form button {
+    margin-left: 10px;
+}
+
+.top-bar .login-icon i {
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* Contenu principal */
+.content {
+    margin-left: 270px;
+    padding: 30px;
+    margin-top: 80px;
+    transition: margin-left 0.3s;
+}
+
+/* Style du formulaire */
+.form-container {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #0d6efd;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.back-link:hover {
+    color: #0b5ed7;
+    text-decoration: underline;
+}
+
+.back-link i {
+    margin-right: 5px;
+}
+
+/* Style du bouton de déconnexion */
+.logout {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    width: 100%;
+    padding: 15px 25px;
+    border-top: 1px solid #34495e;
+}
+
+/* Sidebar réduite */
+.sidebar.collapsed {
+    width: 80px;
+}
+
+.sidebar.collapsed a {
+    font-size: 0;
+    text-align: center;
+    padding: 15px 5px;
+}
+
+.sidebar.collapsed a i {
+    margin-right: 0;
+    font-size: 20px;
+}
+
+.top-bar .logo.collapsed {
+    margin-left: 90px;
+}
+
+.content.collapsed-content {
+    margin-left: 100px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 80px;
+    }
+    
+    .sidebar a {
+        font-size: 0;
+        text-align: center;
+        padding: 15px 5px;
+    }
+    
+    .sidebar a i {
+        margin-right: 0;
+        font-size: 20px;
+    }
+    
+    .top-bar .logo {
+        margin-left: 90px;
+    }
+    
+    .content {
+        margin-left: 100px;
+    }
+    
+    .top-bar .search-form input {
+        width: 150px;
+    }
+}
