@@ -19,6 +19,7 @@ error_reporting(E_ALL);
             justify-content: center;
             gap: 20px;
             margin-top: 50px;
+            flex-wrap: wrap;
         }
         .choice-btn {
             padding: 20px 40px;
@@ -33,10 +34,13 @@ error_reporting(E_ALL);
             transform: scale(1.05);
         }
         .btn-campaign {
-            background-color:rgb(63, 131, 203);
+            background-color: rgb(63, 131, 203);
         }
         .btn-promotion {
-            background-color:rgb(59, 189, 89);
+            background-color: rgb(59, 189, 89);
+        }
+        .btn-newsletter {
+            background-color: rgb(155, 89, 182); /* Purple color for newsletter */
         }
     </style>
 </head>
@@ -65,6 +69,7 @@ error_reporting(E_ALL);
         <a href="#"><i class="fas fa-campground"></i> Activités</a>
         <a href="btransport.html"><i class="fas fa-car"></i> Transports</a>
         <a href="promotion.php"><i class="fas fa-credit-card"></i> Promotions</a>
+        <a href="manage_newsletter.php"><i class="fas fa-envelope"></i> Newsletter</a>
         <a href="#"><i class="fas fa-star"></i> Avis</a>
         <div class="logout">
             <a href="#"><i class="fas fa-sign-out-alt"></i> Se Déconnecter</a>
@@ -73,11 +78,12 @@ error_reporting(E_ALL);
 
     <!-- Contenu principal -->
     <div class="content">
-        <h1>Gestion des Promotions et Campagnes</h1>
+        <h1>Gestion des Promotions, Campagnes et Newsletter</h1>
 
         <div class="choice-container">
             <a href="manage_campaign.php" class="choice-btn btn-campaign">Gérer les Campagnes</a>
             <a href="manage_promotion.php" class="choice-btn btn-promotion">Gérer les Promotions</a>
+            <a href="manage_newsletter.php" class="choice-btn btn-newsletter">Gérer la Newsletter</a>
         </div>
     </div>
 </body>

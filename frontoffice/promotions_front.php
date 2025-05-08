@@ -3,20 +3,22 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Include controllers
+// Include controllers and models
 require_once '../Controllers/controller.php';
-require_once '../Controllers/promotion_controller.php';
+require_once '../Models/promotion_model.php';
+require_once '../Models/model.php';
+require_once '../vendor/autoload.php';
 
 // Fetch campaigns
-$campaignController = new CompagneController();
-$campaigns = $campaignController->handleRequest();
+$compagne = new Compagne();
+$campaigns = $compagne->readAll(); // Récupérer toutes les campagnes
 
 // Fetch promotions
-$promotionController = new PromotionController();
+$promotion = new Promotion();
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 $sort = isset($_GET['sort']) ? $_GET['sort'] : 'idP';
 $order = isset($_GET['order']) ? $_GET['order'] : 'ASC';
-$promotions = $promotionController->handleRequest();
+$promotions = $promotion->readAll($search, $sort, $order);
 
 // Group promotions by campaign
 $promotionsByCampaign = [];
@@ -37,7 +39,7 @@ foreach ($oldQrFiles as $oldFile) {
 }
 
 // Générer un QR Code pour chaque campagne avec QRCode Monkey API
-$baseUrl = "http://192.168.60.1/web10-Copie/frontoffice";
+$baseUrl = "http://localhost.8888/web10-Copie/frontoffice";
 foreach ($campaigns as &$campaign) {
     $qrCodeFile = $qrcodesDir . 'campaign_' . $campaign['id'] . '.png';
     $campaign['qrCodeFile'] = $qrCodeFile;
@@ -57,7 +59,7 @@ foreach ($campaigns as &$campaign) {
     }
 }
 unset($campaign);
-//http://192.168.60.1/web10-Copie/frontoffice/campaign_poster.php?id=101 test poster
+//http://192.168.60.1/web10-Copie/frontoffice/campaign_poster.php?id=101 // test qrCode
 ?>
 
 <!DOCTYPE html>
@@ -149,7 +151,7 @@ unset($campaign);
             font-size: 14px;
         }
 
-        .search-icon, .login-icon {
+        .search-icon {
             font-size: 20px;
             margin-left: 20px;
             cursor: pointer;
@@ -157,11 +159,17 @@ unset($campaign);
             transition: color 0.3s;
         }
 
-        .search-icon:hover, .login-icon:hover {
+        .search-icon:hover {
             color: #4a90e2;
         }
 
-        /* Promotions Section */
+        .login-icon {
+            font-size: 20px;
+            margin-left: 20px;
+            cursor: pointer;
+            color: #f8f5f5;
+        }
+
         .promotions-section {
             padding: 50px 5%;
             background-color: #f9f9f9;
@@ -255,7 +263,7 @@ unset($campaign);
             margin-bottom: 15px;
         }
 
-        .promotion-info .date, .promotion-info .pourcentage {
+        .promotion-info .pourcentage {
             font-weight: bold;
             color: #4a90e2;
         }
@@ -277,7 +285,6 @@ unset($campaign);
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        /* Sort Dropdown */
         .sort-container {
             margin-bottom: 20px;
             text-align: right;
@@ -290,7 +297,22 @@ unset($campaign);
             font-size: 14px;
         }
 
-        /* Responsive */
+        .newsletter-button {
+            display: block;
+            width: fit-content;
+            margin: 30px auto;
+            padding: 10px 20px;
+            background-color: #4a90e2;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .newsletter-button:hover {
+            background-color: #3a7bc8;
+        }
+
         @media (max-width: 768px) {
             .promotion-card {
                 width: 100%;
@@ -394,41 +416,108 @@ unset($campaign);
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>
+
+        <!-- Ajout de la section newsletter -->
+        <a href="newsletter.php" class="newsletter-button animate__animated animate__fadeIn">S'inscrire à la Newsletter</a>
     </section>
 
-    <!-- Reuse the blue section from index.html for consistency -->
     <section class="blue-section">
-        <div class="info">
-            <div class="services-info animate__animated animate__fadeIn" style="animation-delay: 0.2s;">
-                <h3>Nos Services</h3>
-                <p>Location de bungalows</p>
-                <p>Activités de groupe</p>
-                <p>Transports privés</p>
-                <p>Guide touristique</p>
-                <p>Service de restauration</p>
-            </div>
-
-            <div class="contact-info animate__animated animate__fadeIn" style="animation-delay: 0.4s;">
-                <h3>Contactez-nous</h3>
-                <p><i class="fas fa-envelope"></i> Email : contact@bungoff.com</p>
-                <p><i class="fas fa-phone"></i> Téléphone : +216 94245514</p>
-                <p><i class="fas fa-map-marker-alt"></i> Adresse : Ariana, Tunisie</p>
-            </div>
-
-            <div class="social-info animate__animated animate__fadeIn" style="animation-delay: 0.6s;">
-                <h3>Suivez-nous</h3>
-                <p><i class="fab fa-facebook"></i> Facebook</p>
-                <p><i class="fab fa-instagram"></i> Instagram</p>
-                <p><i class="fab fa-twitter"></i> Twitter</p>
-                <p><i class="fab fa-tiktok"></i> TikTok</p>
-            </div>
-
-            <div class="reserve-now animate__animated animate__fadeIn" style="animation-delay: 0.8s;">
-                <h3>Prêt à partir?</h3>
-                <p>Réservez dès maintenant votre bungalow de rêve!</p>
-                <button class="reserve-btn">Réserver Maintenant</button>
-            </div>
+    <div class="info">
+        <div class="services-info animate__animated animate__fadeIn" style="animation-delay: 0.2s;">
+            <h3>Nos Services</h3>
+            <p>Location de bungalows</p>
+            <p>Activités de groupe</p>
+            <p>Transports privés</p>
+            <p>Guide touristique</p>
+            <p>Service de restauration</p>
         </div>
-    </section>
-</body>
-</html>
+
+        <div class="contact-info animate__animated animate__fadeIn" style="animation-delay: 0.4s;">
+            <h3>Contactez-nous</h3>
+            <p><i class="fas fa-envelope"></i> Email : contact@bungoff.com</p>
+            <p><i class="fas fa-phone"></i> Téléphone : +216 94245514</p>
+            <p><i class="fas fa-map-marker-alt"></i> Adresse : Ariana, Tunisie</p>
+        </div>
+
+        <div class="social-info animate__animated animate__fadeIn" style="animation-delay: 0.6s;">
+            <h3>Suivez-nous</h3>
+            <p><i class="fab fa-facebook"></i> Facebook</p>
+            <p><i class="fab fa-instagram"></i> Instagram</p>
+            <p><i class="fab fa-twitter"></i> Twitter</p>
+            <p><i class="fab fa-tiktok"></i> TikTok</p>
+        </div>
+
+        <div class="reserve-now animate__animated animate__fadeIn" style="animation-delay: 0.8s;">
+            <h3>Prêt à partir?</h3>
+            <p>Réservez dès maintenant votre bungalow de rêve!</p>
+            <button class="reserve-btn">Réserver Maintenant</button>
+        </div>
+    </div>
+</section>
+<style>
+.blue-section {
+    background-color: #126cb6;
+    padding: 50px 5%;
+    color: white;
+    text-align: center;
+}
+
+.blue-section .info {
+    display: flex;
+    flex-direction: row; /* Alignement horizontal */
+    justify-content: space-around; /* Espacement égal entre les éléments */
+    flex-wrap: wrap; /* Permet de passer à la ligne si nécessaire sur petits écrans */
+    gap: 20px; /* Espacement entre les colonnes */
+}
+
+.blue-section .services-info,
+.blue-section .contact-info,
+.blue-section .social-info,
+.blue-section .reserve-now {
+    flex: 1; /* Chaque section prend une part égale de l'espace */
+    min-width: 200px; /* Largeur minimale pour éviter que les éléments ne deviennent trop étroits */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1); /* Légère opacité pour différencier */
+    border-radius: 10px;
+}
+
+.blue-section h3 {
+    margin-bottom: 15px;
+}
+
+.blue-section p {
+    margin: 5px 0;
+}
+
+.blue-section .reserve-btn {
+    padding: 8px 20px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.blue-section .reserve-btn:hover {
+    background-color: #3a7bc8;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Responsivité */
+@media (max-width: 768px) {
+    .blue-section .info {
+        flex-direction: column; /* Retour à une disposition verticale sur petits écrans */
+        align-items: center;
+    }
+
+    .blue-section .services-info,
+    .blue-section .contact-info,
+    .blue-section .social-info,
+    .blue-section .reserve-now {
+        width: 100%; /* Pleine largeur sur petits écrans */
+    }
+}
+</style>
