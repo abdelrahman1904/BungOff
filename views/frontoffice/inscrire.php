@@ -41,6 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // 4. Réduire la capacité de 1
             $stmt = $pdo->prepare("UPDATE planification SET capacite = capacite - 1 WHERE IDP = ?");
             $stmt->execute([$IDP]);
+             // 5. Mettre à jour is_seen à 0
+             $stmt = $pdo->prepare("UPDATE inscription SET is_seen = 0 WHERE IDP = ?");
+             $stmt->execute([$IDP]);
+ 
 
             $pdo->commit(); // Commit de la transaction
 

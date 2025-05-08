@@ -4,7 +4,6 @@ require_once '../../models/config.php';
 try {
     $pdo = config::getConnexion();
     
-    // Vérifier si une recherche a été faite
     if (isset($_POST['search']) && !empty($_POST['search'])) {
         $search = $_POST['search'];
         $stmt = $pdo->prepare("SELECT titre, photo FROM activite WHERE titre LIKE :search");
@@ -13,8 +12,29 @@ try {
         $stmt = $pdo->prepare("SELECT titre, photo FROM activite");
         $stmt->execute();
     }
-    
+
     $activites = $stmt->fetchAll();
+
+    // >>> AJOUT : Charger les lieux pour la carte <<< 
+    $lieuStmt = $pdo->prepare("SELECT p.lieu, a.titre, a.photo
+                               FROM planification p
+                               JOIN activite a ON p.nom_activite = a.titre");
+    $lieuStmt->execute();
+    $localisations = $lieuStmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Organiser les activités par lieu
+    $groupedByLieu = [];
+    foreach ($localisations as $localisation) {
+        $lieu = $localisation['lieu'];
+        if (!isset($groupedByLieu[$lieu])) {
+            $groupedByLieu[$lieu] = [];
+        }
+        $groupedByLieu[$lieu][] = ['titre' => $localisation['titre'], 'photo' => $localisation['photo']];
+    }
+
+    // Retourner le résultat sous forme de JSON
+    $localisationsJSON = json_encode($groupedByLieu);
+
 } catch (Exception $e) {
     die("Erreur lors de la récupération des activités : " . $e->getMessage());
 }
@@ -29,7 +49,6 @@ try {
   <!-- Ajoutez ces lignes dans la section <head> de votre HTML pour inclure Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 </head>
 <body>
@@ -61,6 +80,7 @@ try {
     <i class="fas fa-user login-icon"></i>
   </div>
 </header>
+
 <section class="activities-title">
     <h2>
       <span class="letter">A</span>
@@ -74,74 +94,64 @@ try {
       <span class="letter">S</span>
     </h2>
   </section>
-  <section class="activities-map">
-    <div id="map" style="height: 400px;"></div>
-    <h3>Localisation des Activités</h3>
-    <!-- Formulaire de recherche -->
-    <form method="POST" action="#resultats" style="margin-top: 20px; text-align: center;">
 
-  <input type="text" name="search" placeholder="Rechercher une activité..." style="padding: 8px; width: 200px;">
-  <button type="submit" style="padding: 8px 12px; background-color: #3498db; color: white; border: none; cursor: pointer;">Rechercher</button>
-  <button type="button" onclick="window.location.href='activite.php';" style="padding: 8px 12px; background-color: #2ecc71; color: white; border: none; cursor: pointer; margin-left:10px;">Réinitialiser</button>
-</form>
+<section class="activities-map">
+  <div id="map" style="height: 400px;"></div>
+  <h3>Localisation des Activités</h3>
+  <form method="POST" action="#resultats" style="margin-top: 20px; text-align: center;">
+    <input type="text" name="search" placeholder="Rechercher une activité..." style="padding: 8px; width: 200px;">
+    <button type="submit" style="padding: 8px 12px; background-color: #3498db; color: white; border: none; cursor: pointer;">Rechercher</button>
+    <button type="button" onclick="window.location.href='activite.php';" style="padding: 8px 12px; background-color: #2ecc71; color: white; border: none; cursor: pointer; margin-left:10px;">Réinitialiser</button>
+  </form>
+</section>
 
-  </section>
-  
-  <main id="resultats" class="activities-container">
+<main id="resultats" class="activities-container">
     <?php foreach ($activites as $activite): ?>
     <div class="activity-card">
       <img src="image/<?php echo htmlspecialchars($activite['photo']); ?>" alt="<?php echo htmlspecialchars($activite['titre']); ?>">
       <div class="info-overlay">
         <h3><?php echo htmlspecialchars($activite['titre']); ?></h3>
         <a class="reserve-btn" href="details.php?titre=<?php echo urlencode($activite['titre']); ?>">plus de détails</a>
-
       </div>
     </div>
-  <?php endforeach; ?>
+    <?php endforeach; ?>
 </main>
 
-<section class="blue-section">
-  <div class="info">
-    <div class="services-info">
-      <h3>Nos Services</h3>
-      <p>Location de bungalows</p>
-      <p>Activités de groupe</p>
-      <p>Transports privés</p>
-    </div>
-    <div class="contact-info">
-      <h3>Contactez-nous</h3>
-      <p>Email : contact@bungoff.com</p>
-      <p>Téléphone : +216 94245514</p>
-      <p>Adresse : Ariana, Tunisie</p>
-    </div>
-    <div class="social-info">
-      <h3>Suivez-nous</h3>
-      <p>Facebook</p>
-      <p>Instagram</p>
-      <p>Twitter</p>
-    </div>
-    <div class="reserve-now">
-      <p>Réservez dès maintenant !</p>
-    </div>
-  </div>
-  
-</section>
-
 <script>
-  // Code pour gérer les sliders (si tu en as besoin)
-  document.querySelectorAll('.slider').forEach(slider => {
-    let slides = slider.querySelectorAll('.slide');
-    let index = 0;
+  var map = L.map('map').setView([34.0, 9.0], 6); // Centrage sur la Tunisie
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap'
+  }).addTo(map);
 
-    setInterval(() => {
-      slides[index].classList.remove('active');
-      index = (index + 1) % slides.length;
-      slides[index].classList.add('active');
-    }, 2000);
+  var activities = <?php echo $localisationsJSON; ?>;
+
+  // Parcourir les lieux et regrouper les activités sous un seul marqueur par lieu
+  Object.entries(activities).forEach(([lieu, activities]) => {
+    //Fait une requête vers l’API Nominatim (OpenStreetMap) pour convertir le nom du lieu (ex : "Tozeur") en coordonnées GPS (latitude, longitude).
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(lieu)}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data && data[0]) {
+          const lat = data[0].lat;
+          const lon = data[0].lon;
+
+          let popupContent = "";
+          activities.forEach(activity => {
+            popupContent += `<strong>${activity.titre}</strong><br><img src="image/${activity.photo}" width="100"><br><hr>`;
+          });
+
+          // Ajouter le marqueur au lieu
+          const marker = L.marker([lat, lon]).addTo(map);
+          marker.bindPopup(popupContent);
+        } else {
+          console.warn(`Lieu introuvable : ${lieu}`);
+        }
+      })
+      .catch(error => console.error("Erreur géocodage :", error));
   });
 </script>
 
 <script src="activite.js"></script>
-</body>
 
-</html> 
+</body>
+</html>

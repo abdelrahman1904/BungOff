@@ -23,7 +23,7 @@ document.querySelectorAll('.activity-card').forEach(card => {
     });
   });
 // Initialisation de la carte
-var map = L.map('map').setView([33.914, 8.131], 7); // Centré sur Tozeur (au besoin, ajustez la vue selon les villes)
+/*var map = L.map('map').setView([33.914, 8.131], 7); // Centré sur Tozeur (au besoin, ajustez la vue selon les villes)
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -86,7 +86,7 @@ var activities = [
     image: "image/creation.jpg"
   }
 ];
-
+*/
 // Ajouter des marqueurs pour chaque activité
 activities.forEach(function(activity) {
   var marker = L.marker(activity.coordinates).addTo(map);

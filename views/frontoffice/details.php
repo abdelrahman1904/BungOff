@@ -127,13 +127,25 @@ try {
                 </div>
                 <span class="remaining">(<?php echo htmlspecialchars($p['capacite']); ?> places restantes)</span>
 
-                <button class="register-btn"
-                  data-titre="<?php echo htmlspecialchars($activite['titre']); ?>"
-                  data-date="<?php echo htmlspecialchars($p['date']); ?>"
-                  data-heure="<?php echo htmlspecialchars($p['heure_debut']); ?>">
-                  <i class="fas fa-user-plus"></i> S'inscrire
-                </button>
+                                <?php
+                  $date_actuelle = date('Y-m-d');
+                  $date_planif = $p['date'];
+                  $est_passee = strtotime($date_planif) < strtotime($date_actuelle);
+                ?>
 
+                <?php if ($est_passee): ?>
+                  <button class="register-btn disabled" style="background-color: purple; cursor: not-allowed;" disabled>
+                    <i class="fas fa-lock"></i> Inaccessible
+                  </button>
+                <?php else: ?>
+                  <button class="register-btn"
+                    data-titre="<?php echo htmlspecialchars($activite['titre']); ?>"
+                    data-date="<?php echo htmlspecialchars($p['date']); ?>"
+                    data-heure="<?php echo htmlspecialchars($p['heure_debut']); ?>">
+                    <i class="fas fa-user-plus"></i> S'inscrire
+                  </button>
+                <?php endif; ?>
+                  
                 </div>
               </div>
             </div>

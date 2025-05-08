@@ -339,4 +339,11 @@
   .add-activity-link:hover {
     background-color: #c5dbca;
   }
-  
+  .card {
+    background: #fdfdfd;
+    border-left: 6px solid #0083B0;
+    transition: all 0.3s ease-in-out;
+}
+.card:hover {
+    transform: scale(1.02);
+}

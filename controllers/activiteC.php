@@ -34,17 +34,23 @@ class ActiviteC {
             echo 'Erreur: ' . $e->getMessage();
         }
     }
+    // Dans ton ActiviteC.php (ou modèle SQL)
     public function supprimerActivite($id) {
-        $sql = "DELETE FROM activite WHERE IDA = :id";
+        $sql1 = "DELETE FROM inscription WHERE IDA = :id";
+        $sql2 = "DELETE FROM activite WHERE IDA = :id";
+
         $db = config::getConnexion();
         try {
-            $query = $db->prepare($sql);
-            $query->bindParam(':id', $id);
-            $query->execute();
-        } catch (Exception $e) {
-            echo 'Erreur: ' . $e->getMessage();
+            $query1 = $db->prepare($sql1);
+            $query1->execute(['id' => $id]);
+
+            $query2 = $db->prepare($sql2);
+            $query2->execute(['id' => $id]);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
         }
     }
+
     
     public function modifierActivite($titre, $guide, $description, $duree, $type, $prix, $photo, $nbp, $id) {
         $sql = "UPDATE activite 

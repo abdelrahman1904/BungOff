@@ -113,6 +113,7 @@ if (
             <option value="In Drahem">In Drahem</option>
             <option value="Sousse">Sousse</option>
             <option value="Klibia">Klibia</option>
+            <option value="Klibia">Mehdia</option>
         </select>
     </div>
 
@@ -172,20 +173,43 @@ if (
         document.getElementById('planificationForm').addEventListener('submit', function(event) {
     const nomActivite = document.getElementById('nom_activite').value.trim();
     const lieu = document.getElementById('lieu').value.trim();
-    const date = document.getElementById('date').value.trim();
-    const heureDebut = document.getElementById('heure_debut').value.trim();
-    const heureFin = document.getElementById('heure_fin').value.trim();
+    const date = document.getElementById('date').value;
+    const heureDebut = document.getElementById('heure_debut').value;
+    const heureFin = document.getElementById('heure_fin').value;
     const capacite = document.getElementById('capacite').value.trim();
 
+    // Champs vides
     if (!nomActivite || !lieu || !date || !heureDebut || !heureFin || !capacite) {
         alert('Veuillez remplir tous les champs !');
-        event.preventDefault(); // Empêche l'envoi du formulaire
+        event.preventDefault();
         return;
     }
 
+    // Capacité
     if (isNaN(capacite) || capacite <= 0) {
         alert('La capacité doit être un nombre supérieur à 0.');
-        event.preventDefault(); // Annule l'envoi
+        event.preventDefault();
+        return;
+    }
+
+    // Vérification date >= aujourd'hui
+    const today = new Date();
+    const selectedDate = new Date(date);
+    today.setHours(0, 0, 0, 0); // Ignorer l'heure
+
+    if (selectedDate < today) {
+        alert("La date ne peut pas être antérieure à aujourd'hui.");
+        event.preventDefault();
+        return;
+    }
+
+    // Vérification heure_fin > heure_debut
+    const hDebut = new Date(`1970-01-01T${heureDebut}`);
+    const hFin = new Date(`1970-01-01T${heureFin}`);
+
+    if (hFin <= hDebut) {
+        alert("L'heure de fin doit être supérieure à l'heure de début.");
+        event.preventDefault();
         return;
     }
 
