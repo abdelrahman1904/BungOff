@@ -1,0 +1,148 @@
+/* Réinitialisation et styles généraux */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* En-tête */
+header {
+    background-color: #126cb6;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 30px;
+    height: 80;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.logo-img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.off {
+    color: #b49786;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li a i {
+    margin-right: 5px;
+    color: #b49786;
+}
+
+.extra-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.weather {
+    display: flex;
+    align-items: center;
+}
+
+.weather-icon {
+    font-size: 24px;
+    margin-right: 5px;
+    color: #dde0ee;
+}
+
+/* Vidéo en plein écran */
+.full-width-video {
+    width: 100%;
+    height: auto;
+}
+
+/* Texte d'introduction */
+.intro-text {
+    text-align: center;
+    font-size: 24px;
+    margin: 20px 0;
+}
+
+/* Section des destinations */
+.destinations {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.destination {
+    text-align: center;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+}
+
+.destination img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.destination-info {
+    padding: 10px;
+}
+
+/* Section bleue d'information */
+.blue-section {
+    background-color: #126cb6;
+    color: white;
+    padding: 40px 20px;
+}
+
+.info {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.services-info, .contact-info, .social-info , .reserve-now{
+    margin: 10px 0;
+}
+
+.reserve-now {
+    font-weight: bold;
+    text-align:right;
+    color: #b49786;
+    padding: 30px;
+}
+
+.login-link {
+    color: white;
+    text-decoration: none;
+}
+
+.login-link:hover {
+    color: white; /* Ensure it stays white on hover */
+}

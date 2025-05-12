@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Backoffice</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .admin-section {
+      display: none;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barre du haut -->
+   
+  <div class="top-bar">
+    
+    <div class="logo">Bung<span class="off">OFF</span></div>
+    <div class="toggle-sidebar-icon me-3" onclick="toggleSidebar()" style="cursor: pointer;">
+        <i class="fas fa-bars"></i>
+      </div>
+      
+  </div>
+    <div class="right-icons">
+      <form class="d-inline-flex">
+        <input type="text" class="form-control" placeholder="Recherche...">
+        <button type="submit" class="btn btn-primary ms-2"><i class="fas fa-search"></i></button>
+      </form>
+      <div class="login-icon d-inline-flex ms-3">
+        <i class="fas fa-user"></i>
+      </div>
+    </div>
+   
+
+  <!-- Barre latérale -->
+  <div class="sidebar">
+    <a href="index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <a href="#"><i class="fas fa-user"></i> Utilisateurs</a>
+    <a href="#"><i class="fas fa-home"></i> Bungalows</a>
+    <a href="#"><i class="fas fa-campground"></i> Activités</a>
+    <a href="btransport.html"><i class="fas fa-car"></i> Transports</a>
+    <a href="#"><i class="fas fa-credit-card"></i> Paiement</a>
+    <a href="#"><i class="fas fa-star"></i> Avis</a>
+    <div class="logout">
+      <a href="#"><i class="fas fa-sign-out-alt"></i> Se Déconnecter</a>
+    </div>
+  </div>
+
+  <!-- Contenu principal -->
+  <div class="content">
+    <h1>Transports</h1>
+    <div class="row mt-4">
+      <!-- Gérer les véhicules -->
+      <div class="col-md-3">
+        <div class="card bg-info mb-3">
+          <div class="card-body text-center">
+            <a href="#" onclick="showSection('vehicules')" class="text-white text-decoration-none">Gérer les véhicules</a>
+          </div>
+        </div>
+      </div>
+      <!-- Gérer les trajets -->
+      <div class="col-md-3">
+        <div class="card bg-primary mb-3">
+          <div class="card-body text-center">
+            <a href="#" onclick="showSection('trajets')" class="text-white text-decoration-none">Gérer les trajets</a>
+          </div>
+        </div>
+      </div>
+      <!-- Assignement des véhicules -->
+      <div class="col-md-3">
+        <div class="card bg-warning mb-3">
+          <div class="card-body text-center">
+            <a href="#" onclick="showSection('assignement')" class="text-white text-decoration-none">Assignement des véhicules</a>
+          </div>
+        </div>
+      </div>
+      <!-- Valider les trajets choisis -->
+      <div class="col-md-3">
+        <div class="card bg-success mb-3">
+          <div class="card-body text-center">
+            <a href="#" onclick="showSection('validation')" class="text-white text-decoration-none">Valider les trajets choisis</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sections dynamiques -->
+    <div id="vehicules" class="admin-section">
+      <h3>Gérer les véhicules</h3>
+      <button class="btn btn-success">Ajouter</button>
+      <button class="btn btn-primary">Modifier</button>
+      <button class="btn btn-danger">Supprimer</button>
+    </div>
+
+    <div id="trajets" class="admin-section">
+      <h3>Gérer les trajets</h3>
+      <button class="btn btn-success">Ajouter</button>
+      <button class="btn btn-primary">Modifier</button>
+      <button class="btn btn-danger">Supprimer</button>
+    </div>
+
+    <div id="assignement" class="admin-section">
+      <h3>Assignement des véhicules</h3>
+      <p>Choisissez un véhicule et assignez-le à un trajet.</p>
+    </div>
+
+    <div id="validation" class="admin-section">
+      <h3>Validation des trajets choisis</h3>
+      <p>Validez les trajets proposés par les utilisateurs.</p>
+    </div>
+  </div>
+
+  <!-- Script d'affichage -->
+  <script>
+    function showSection(id) {
+      const sections = document.querySelectorAll('.admin-section');
+      sections.forEach(section => section.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
