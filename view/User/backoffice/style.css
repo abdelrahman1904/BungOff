@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 /* Barre latérale */
+=======
+>>>>>>> 77c66e1 (Integration+bungalow)
 .sidebar {
     position: fixed;
     top: 0;
@@ -69,6 +72,10 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: none;
     overflow: hidden;
+<<<<<<< HEAD
+=======
+    height: 80%;
+>>>>>>> 77c66e1 (Integration+bungalow)
 }
 
 .card:hover {
@@ -142,7 +149,11 @@
     left: 10px;
     width: calc(100% - 20px);
     text-align: center;
+<<<<<<< HEAD
     padding: 1px;
+=======
+    padding: 3px;
+>>>>>>> 77c66e1 (Integration+bungalow)
     border-radius: 5px;
 }
 
@@ -160,11 +171,17 @@
     font-weight: bold;
     display: flex; /* Utilise flexbox pour un alignement plus flexible */
     justify-content: flex-end; /* Aligne le contenu à droite */
+<<<<<<< HEAD
     width: 10%; /* S'assure que l'élément prend toute la largeur disponible */
+=======
+    width: 15%; /* S'assure que l'élément prend toute la largeur disponible */
+    gap: 0rem;
+>>>>>>> 77c66e1 (Integration+bungalow)
 }
 
 .logo .off {
     color: #b49786;
+<<<<<<< HEAD
 }
 .admin-links li {
     margin-right: 10px;
@@ -234,4 +251,87 @@
     display: none;
   }
   
+=======
+    margin: 0;
+    padding: 0;
+}
+/* Sidebar réduite */
+.sidebar.collapsed {
+    width: 80px;
+}
+
+.sidebar.collapsed a {
+    font-size: 0; /* Cache le texte */
+}
+
+.sidebar.collapsed a i {
+    font-size: 18px; /* Garde les icônes visibles */
+    margin-right: 0;
+}
+
+/* Ajuste le contenu quand la sidebar est réduite */
+.content.collapsed-content {
+    margin-left: 100px;
+}
+/* Uniformiser les titres des cartes */
+.card {
+    border-radius: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    overflow: hidden;
+    height: auto;
+    min-height: 120px;
+}
+.card-body {
+    padding: 20px;
+}
+
+
+.card h4 {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+canvas {
+    max-width: 100%;
+}
+
+#statistiquesChart:hover {
+    cursor: pointer;
+}
+.statistique-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0;
+}
+
+.statistique-card {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+.statistique-card:hover {
+    transform: translateY(-5px);
+}
+
+.statistique-header h3 {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.chart-container {
+    max-height: 300px;
+}
+
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+>>>>>>> 77c66e1 (Integration+bungalow)
 

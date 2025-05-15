@@ -1,0 +1,111 @@
+/* Style global de la page */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f1f1f1;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Conteneur principal */
+.container {
+    max-width: 800px;
+    width: 100%;
+    padding: 20px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Titre principal */
+h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Section de la météo actuelle */
+.current-weather {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.current-weather img {
+    width: 120px;
+    height: 120px;
+}
+
+.current-weather .temperature {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.current-weather .description {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+/* Prévisions sur 3 jours */
+h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.forecast {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.forecast-day {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 15px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.forecast-day:hover {
+    transform: scale(1.05);
+}
+
+.forecast-day img {
+    width: 80px;
+    height: 80px;
+}
+
+.forecast-day h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-top: 10px;
+}
+
+.forecast-day p {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .forecast {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .forecast-day {
+        width: 80%;
+        margin: 10px 0;
+    }
+}

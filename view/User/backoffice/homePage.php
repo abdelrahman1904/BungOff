@@ -32,12 +32,18 @@
   <div class="sidebar">
   <a href="homePage.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
   <a href="userlist.php"><i class="fas fa-user"></i> Utilisateurs</a>
+<<<<<<< HEAD
   <a href="#"><i class="fas fa-home"></i> Bungalows</a>
   <a href="#"><i class="fas fa-campground"></i> Activités</a>
+=======
+  <a href="../../bungalow/newback_bung.html"><i class="fas fa-home"></i> Bungalows</a>
+  <a href="../../views/new_act.php"><i class="fas fa-campground"></i> Activités</a>
+>>>>>>> 77c66e1 (Integration+bungalow)
   <a href="#"><i class="fas fa-car"></i> Transports</a>
   <a href="../../Compagne/backoffice/promotion.php"><i class="fas fa-credit-card"></i> Promotion</a>
   <a href="../../Avis/backoffice/index.php"><i class="fas fa-star"></i> Avis</a>
   <div class="logout">
+<<<<<<< HEAD
     <a href="#"><i class="fas fa-sign-out-alt"></i> Se Déconnecter</a>
   </div>
 </div>
@@ -46,6 +52,12 @@
         <div class="logout">
             <a href="index.php"><i class="fas fa-sign-in-alt"></i> Se Déconnecter</a>
         </div>
+=======
+         <a href="index.php"><i class="fas fa-sign-in-alt"></i> Se Déconnecter</a>
+    </div>
+</div>
+
+>>>>>>> 77c66e1 (Integration+bungalow)
     </div>
 
     <!-- Contenu principal -->
@@ -67,7 +79,11 @@
                 <div class="card bg-primary mb-3">
                     <div class="card-body">
                         <h5 class="card-title"><i class="fas fa-home"></i> Bungalows</h5>
+<<<<<<< HEAD
                         <a href="#">Voir les détails →</a>
+=======
+                        <a href="../../bungalow/newback_bung.html">Voir les détails →</a>
+>>>>>>> 77c66e1 (Integration+bungalow)
                     </div>
                 </div>
             </div>
@@ -77,7 +93,11 @@
                 <div class="card bg-secondary mb-3">
                     <div class="card-body">
                         <h5 class="card-title"><i class="fas fa-bicycle"></i> Activités</h5>
+<<<<<<< HEAD
                         <a href="#">Voir les détails →</a>
+=======
+                        <a href="../../views/new_act.php">Voir les détails →</a>
+>>>>>>> 77c66e1 (Integration+bungalow)
                     </div>
                 </div>
             </div>

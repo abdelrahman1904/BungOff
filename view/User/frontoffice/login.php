@@ -77,8 +77,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <title>Login</title>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<<<<<<< HEAD
 </head>
 <body>
+=======
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+    <header>
+    <div class="logo">
+        <img src="image/maison.jpg" alt="Logo BungOFF" class="logo-img">
+        Bung<span class="off">OFF</span>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="#"><i class=""></i> Accueil</a></li>
+            <li><a href="#"><i class="fas fa-home"></i> Bungalows</a></li>
+            <li><a href="#"><i class="fas fa-bicycle"></i> Activités</a></li>
+            <li><a href="#"><i class="fas fa-car"></i> Transports</a></li>
+            <li><a href="#"><i class="fas fa-credit-card"></i> Promotions</a></li>
+            <li><a href="#"><i class="fas fa-comments"></i> Avis</a></li>
+        </ul>
+    </nav>
+    <div class="extra-info">
+        <div class="weather">
+            <i class="fas fa-cloud weather-icon"></i>
+            <div class="weather-info">
+                <div class="ville">Tunis</div>
+                <div class="temperature">22°C</div>
+            </div>
+        </div>
+        <i class="fas fa-search search-icon"></i>
+        <a href="login.php"><i class="fas fa-user login-icon"></i></a>
+    </div>
+</header>
+>>>>>>> 77c66e1 (Integration+bungalow)
 <video class="full-width-video" autoplay muted loop>
     <source src="image_video/Lets Discover Tunisia.mp4" type="video/mp4">
     Votre navigateur ne supporte pas la lecture de vidéos.
@@ -229,6 +263,108 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'])) {
         object-fit: cover;
         z-index: -1;
     }
+<<<<<<< HEAD
+=======
+    
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background-color: #126cb6;
+            ;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .off {
+            color: #b49786;
+        }
+        
+        nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  nav ul li a:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  nav ul li a i {
+    margin-right: 5px;
+    color: #b49786;
+  }
+  
+  .extra-info {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  .weather {
+    display: flex;
+    align-items: center;
+  }
+  
+  .weather-icon {
+    font-size: 22px;
+    margin-right: 6px;
+    color: #dde0ee;
+  }
+  
+        .ville, .temperature {
+            font-size: 14px;
+        }
+        
+        .search-icon, .login-icon {
+            font-size: 20px;
+            margin-left: 20px;
+            cursor: pointer;
+            color: #f8f5f5;
+            transition: color 0.3s;
+        }
+        
+        .search-icon:hover, .login-icon:hover {
+            color: #4a90e2;
+        }
+        .card {
+    background-color: rgba(255, 255, 255, 0.95); /* fond blanc légèrement transparent */
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* ombre douce */
+    backdrop-filter: blur(10px); /* flou derrière si supporté */
+}
+
+.card-body {
+    padding: 2.5rem;
+}
+
+
+
+>>>>>>> 77c66e1 (Integration+bungalow)
 </style>
 <script>
     document.getElementById('togglePassword').addEventListener('click', function () {

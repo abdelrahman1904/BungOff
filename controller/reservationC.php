@@ -1,0 +1,242 @@
+<?php
+include dirname(__DIR__) . '/config.php';
+require_once dirname(__DIR__) . '/model/reservation.php';
+ // Correctement fait référence à model/config.php
+
+
+class reservationC {
+
+    // Ajouter une réservation
+    
+   public function ajouterReservation($reservation) {
+    // Vérification de l'IDB
+    echo 'IDB: ' . $reservation->getIDB();  // Affiche l'ID du bungalow dans la console ou les logs
+
+    // Récupérer le prix par nuit pour le bungalow
+    $prix_nuit = $this->getPrixBungalowById($reservation->getIDB());
+
+    // Calculer le nombre de nuits
+    $date_arrive = new DateTime($reservation->getDateArrive());
+    $date_depart = new DateTime($reservation->getDateDepart());
+    $interval = $date_arrive->diff($date_depart);
+    $nights = $interval->days;
+
+    // Vérifier si le bungalow existe
+    $bungalow = $this->getBungalowById($reservation->getIDB()); // Appel direct via $this
+
+    // Calculer le prix total
+    $prix_total = $prix_nuit * $nights;
+
+    // Vérification de l'utilisateur
+   $id_user = $reservation->getIdUser();
+
+
+    // Insertion de la réservation dans la base de données avec id_user
+    $sql = "INSERT INTO reservation (date_arrive, date_depart, nbp, prix_total, IDB, id_user)
+            VALUES (:date_arrive, :date_depart, :nbp, :prix_total, :IDB, :id_user)"; // Ajout de id_user
+    
+    $db = config::getConnexion();
+    try {
+        $query = $db->prepare($sql);
+        $query->execute([
+            'date_arrive' => $reservation->getDateArrive(),
+            'date_depart' => $reservation->getDateDepart(),
+            'nbp' => $reservation->getNbp(),
+            'prix_total' => $prix_total,
+            'IDB' => $reservation->getIDB(),
+            'id_user' => $id_user  // Ajout du champ id_user
+        ]);
+    } catch (PDOException $e) {
+        echo 'Erreur: ' . $e->getMessage();
+    }
+}
+
+    
+
+    // Afficher une réservation par ID
+    public function afficherReservations() {
+    $sql = "SELECT r.*, b.nom AS nom_bungalow, b.image AS image_bungalow 
+            FROM reservation r 
+            JOIN bungalow b ON r.IDB = b.IDB";
+
+    $db = config::getConnexion();
+    try {
+        $liste = $db->query($sql);
+        return $liste->fetchAll();
+    } catch (Exception $e) {
+        die('Erreur: ' . $e->getMessage());
+    }
+}
+
+
+    
+
+    // Supprimer une réservation
+    public function supprimerReservation($id) {
+        $sql = "DELETE FROM reservation WHERE IDR = :id";
+        $db = config::getConnexion();
+        try {
+            $query = $db->prepare($sql);
+            $query->bindParam(':id', $id, PDO::PARAM_INT);
+            $query->execute();
+        } catch (PDOException $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
+    }
+ public function getAllReservations() {
+        $sql = "SELECT * FROM reservation"; // Récupère toutes les réservations de la base de données
+        $db = config::getConnexion();
+        try {
+            $query = $db->prepare($sql);
+            $query->execute();
+            return $query->fetchAll(); // Retourne toutes les réservations sous forme de tableau
+        } catch (Exception $e) {
+            die('Erreur: ' . $e->getMessage()); // Gérer les erreurs de la base de données
+        }
+    }
+    // Modifier une réservation
+    public function modifierReservation($id, $date_arrive, $date_depart, $nbp, $prix_total, $IDB) {
+        $sql = "UPDATE reservation SET date_arrive = :date_arrive, date_depart = :date_depart, 
+                nbp = :nbp, prix_total = :prix_total, IDB = :IDB WHERE IDR = :id"; // Utilisation de IDR comme identifiant
+        $db = config::getConnexion();
+        try {
+            $query = $db->prepare($sql);
+            $query->execute([
+                'id' => $id,
+                'date_arrive' => $date_arrive,
+                'date_depart' => $date_depart,
+                'nbp' => $nbp,
+                'prix_total' => $prix_total,
+                'IDB' => $IDB
+            ]);
+        } catch (PDOException $e) {
+            echo 'Erreur: ' . $e->getMessage();
+        }
+    }
+    public function getNomBungalowById($id_bungalow) {
+        $sql = "SELECT nom FROM bungalow WHERE IDB = :id_bungalow";
+        $db = config::getConnexion();
+        try {
+            $query = $db->prepare($sql);
+            $query->bindParam(':id_bungalow', $id_bungalow, PDO::PARAM_INT);
+            $query->execute();
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+    
+            if ($result) {
+                return $result['nom'];
+            } else {
+                throw new Exception("Bungalow non trouvé.");
+            }
+        } catch (PDOException $e) {
+            die('Erreur lors de la récupération du nom du bungalow: ' . $e->getMessage());
+        }
+    }
+
+    // Méthode pour récupérer le prix d'un bungalow par son ID
+    public function getPrixBungalowById($id_bungalow) {
+        $sql = "SELECT prix_nuit FROM bungalow WHERE IDB = :id_bungalow";
+        $db = config::getConnexion();
+        try {
+            $query = $db->prepare($sql);
+            $query->bindParam(':id_bungalow', $id_bungalow, PDO::PARAM_INT);
+            $query->execute();
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+
+            if ($result) {
+                return $result['prix_nuit'];
+            } else {
+                throw new Exception("Bungalow non trouvé.");
+            }
+        } catch (PDOException $e) {
+            die('Erreur lors de la récupération du prix du bungalow: ' . $e->getMessage());
+        }
+    }
+    public function getBungalowById($idb)
+{
+    $sql = "SELECT * FROM bungalow WHERE IDB = :idb"; // Sélectionner les informations du bungalow par son ID
+
+    $db = config::getConnexion();
+    try {
+        $query = $db->prepare($sql);
+        $query->bindParam(':idb', $idb, PDO::PARAM_INT); // Lier l'IDB du bungalow en paramètre
+        $query->execute();
+        $bungalow = $query->fetch(PDO::FETCH_ASSOC); // Récupère une ligne (un bungalow)
+        return $bungalow;
+    } catch (PDOException $e) {
+        die('Erreur lors de la récupération du bungalow: ' . $e->getMessage());
+    }
+}
+
+public function searchReservations($critere, $valeur) {
+    $db = config::getConnexion();
+
+    try {
+        // Si le critère est le nom du bungalow (jointure avec la table bungalow)
+        if ($critere === 'nom') {
+            $sql = "SELECT r.* 
+                    FROM reservation r 
+                    JOIN bungalow b ON r.IDB = b.IDB 
+                    WHERE b.nom LIKE :valeur";
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':valeur', '%' . $valeur . '%');
+        }
+        // Si le critère est une date (on utilise LIKE aussi pour autoriser les recherches partielles)
+        elseif ($critere === 'date_arrive' || $critere === 'date_depart') {
+            $sql = "SELECT * FROM reservation WHERE $critere LIKE :valeur";
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':valeur', '%' . $valeur . '%');  // Ex: %2025-04-25%
+        }
+        else {
+            return [];
+        }
+
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        die('Erreur: ' . $e->getMessage());
+    }
+}
+
+public function getAllReservationsSorted($colonne, $ordre) {
+    $allowedColumns = ['date_arrive', 'prix_total'];
+    $allowedOrder = ['asc', 'desc'];
+
+    if (!in_array($colonne, $allowedColumns) || !in_array($ordre, $allowedOrder)) {
+        return $this->getAllReservations();
+    }
+
+    $sql = "SELECT * FROM reservation ORDER BY $colonne $ordre";
+    $db = config::getConnexion();
+
+    try {
+        $query = $db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+
+
+   // Méthode pour récupérer une réservation par son ID
+public function getReservationById($idr)
+{
+    $sql = "SELECT r.*, b.prix_nuit 
+    FROM reservation r
+    JOIN bungalow b ON r.IDB = b.IDB
+    WHERE r.IDR = :idr";
+
+$db = config::getConnexion();
+try {
+$query = $db->prepare($sql);
+$query->bindParam(':idr', $idr);
+$query->execute();
+return $query->fetch();
+} catch (PDOException $e) {
+die('Erreur: ' . $e->getMessage());
+}
+}
+
+}
+?>

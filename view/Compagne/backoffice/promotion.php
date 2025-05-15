@@ -65,7 +65,11 @@ error_reporting(E_ALL);
   <a href="../../User/backoffice/homePage.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
   <a href="../../User/backoffice/userlist.php"><i class="fas fa-user"></i> Utilisateurs</a>
   <a href="#"><i class="fas fa-home"></i> Bungalows</a>
+<<<<<<< HEAD
   <a href="#"><i class="fas fa-campground"></i> Activités</a>
+=======
+  <a href="../../views/new_act.php"><i class="fas fa-campground"></i> Activités</a>
+>>>>>>> 77c66e1 (Integration+bungalow)
   <a href="#"><i class="fas fa-car"></i> Transports</a>
   <a href="promotion.php"><i class="fas fa-credit-card"></i> Promotion</a>
   <a href="../../Avis/backoffice/index.php"><i class="fas fa-star"></i> Avis</a>

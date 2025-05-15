@@ -342,8 +342,13 @@ unset($campaign);
     <nav>
         <ul>
             <li><a href="../../User/frontoffice/homePage.php">Accueil</a></li>
+<<<<<<< HEAD
             <li><a href="#"><i class="fas fa-home"></i> Bungalows</a></li>
             <li><a href="#"><i class="fas fa-bicycle"></i> Activités</a></li>
+=======
+            <li><a href="../../bungalow/frontoffice/bungalow_front.php"><i class="fas fa-home"></i> Bungalows</a></li>
+            <li><a href="../../views/frontoffice/activite.php"><i class="fas fa-bicycle"></i> Activités</a></li>
+>>>>>>> 77c66e1 (Integration+bungalow)
             <li><a href="#"><i class="fas fa-car"></i> Transports</a></li>
             <li><a href="promotions_front.php"><i class="fas fa-credit-card"></i> Promotions</a></li>
             <li><a href="../../Avis/frontoffice/index.php"><i class="fas fa-comments"></i> Avis</a></li>
